@@ -14,8 +14,11 @@ public class Worker {
     @ManyToOne
     private Workplace workplace;
     private String position;
-    @OneToMany(mappedBy = "worker")
+    @OneToMany
     private List<Document> documentsCreated = new ArrayList<>();
+
+    public Worker() {
+    }
 
     public Worker(String firstName, String sureName, String position) {
         this.firstName = firstName;

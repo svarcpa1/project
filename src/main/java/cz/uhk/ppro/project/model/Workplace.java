@@ -17,6 +17,10 @@ public class Workplace {
     @OneToMany(mappedBy = "workplace")
     private List<Document> documents = new ArrayList<>();
 
+
+    public Workplace() {
+    }
+
     public Workplace(String name) {
         this.name = name;
     }

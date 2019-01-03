@@ -20,6 +20,9 @@ public class Document {
     private Date dateCreated;
     private Date dateExpired;
 
+    public Document() {
+    }
+
     public Document(String name, String filePath) {
         this.name = name;
         this.filePath = filePath;

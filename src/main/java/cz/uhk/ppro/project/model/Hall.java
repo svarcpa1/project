@@ -16,6 +16,10 @@ public class Hall {
     @OneToMany(mappedBy = "hall")
     private List<Workplace> workplaces = new ArrayList<>();
 
+
+    public Hall() {
+    }
+
     public Hall(String name) {
         this.name = name;
     }
