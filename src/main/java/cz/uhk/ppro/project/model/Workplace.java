@@ -1,13 +1,20 @@
 package cz.uhk.ppro.project.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Workplace {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
+    @ManyToOne
     private Hall hall;
+    @OneToMany(mappedBy = "workplace")
     private List<Worker> workers = new ArrayList<>();
+    @OneToMany(mappedBy = "workplace")
     private List<Document> documents = new ArrayList<>();
 
     public Workplace(String name) {

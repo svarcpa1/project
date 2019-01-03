@@ -1,17 +1,26 @@
 package cz.uhk.ppro.project.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
+@Entity
 public class Document {
+    @Id
+    @GeneratedValue
     private int id;
-    private int name;
+    private String name;
+    @ManyToOne
     private Workplace workplace;
+    @ManyToOne
     private Worker worketCreated;
     private String filePath;
     private Date dateCreated;
     private Date dateExpired;
 
-    public Document(int name, String filePath) {
+    public Document(String name, String filePath) {
         this.name = name;
         this.filePath = filePath;
     }
@@ -24,11 +33,11 @@ public class Document {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
