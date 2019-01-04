@@ -7,8 +7,8 @@ import java.util.List;
 @Entity
 public class Workplace {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     @ManyToOne
     private Hall hall;
@@ -19,17 +19,18 @@ public class Workplace {
 
 
     public Workplace() {
+        id=0;
     }
 
     public Workplace(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

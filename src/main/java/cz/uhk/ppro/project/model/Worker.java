@@ -7,17 +7,18 @@ import java.util.List;
 @Entity
 public class Worker {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String firstName;
     private String sureName;
     @ManyToOne
     private Workplace workplace;
     private String position;
-    @OneToMany
+    @OneToMany(mappedBy = "workerCreated")
     private List<Document> documentsCreated = new ArrayList<>();
 
     public Worker() {
+        id=0;
     }
 
     public Worker(String firstName, String sureName, String position) {
@@ -26,11 +27,11 @@ public class Worker {
         this.position = position;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,23 +1,20 @@
 package cz.uhk.ppro.project.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Hall {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     @OneToMany(mappedBy = "hall")
     private List<Workplace> workplaces = new ArrayList<>();
 
-
     public Hall() {
+        id=0;
     }
 
     public Hall(String name) {
@@ -32,11 +29,11 @@ public class Hall {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

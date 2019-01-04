@@ -1,26 +1,24 @@
 package cz.uhk.ppro.project.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Document {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     @ManyToOne
     private Workplace workplace;
     @ManyToOne
-    private Worker worketCreated;
+    private Worker workerCreated;
     private String filePath;
     private Date dateCreated;
     private Date dateExpired;
 
     public Document() {
+        id=0;
     }
 
     public Document(String name, String filePath) {
@@ -28,11 +26,11 @@ public class Document {
         this.filePath = filePath;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -52,12 +50,12 @@ public class Document {
         this.workplace = workplace;
     }
 
-    public Worker getWorketCreated() {
-        return worketCreated;
+    public Worker getWorkerCreated() {
+        return workerCreated;
     }
 
-    public void setWorketCreated(Worker worketCreated) {
-        this.worketCreated = worketCreated;
+    public void setWorkerCreated(Worker workerCreated) {
+        this.workerCreated = workerCreated;
     }
 
     public String getFilePath() {
