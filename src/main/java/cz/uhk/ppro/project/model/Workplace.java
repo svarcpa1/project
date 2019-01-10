@@ -17,6 +17,7 @@ public class Workplace {
     @OneToMany(mappedBy = "workplace")
     private List<Document> documents = new ArrayList<>();
 
+    private String description;
 
     public Workplace() {
         id=0;
@@ -64,5 +65,13 @@ public class Workplace {
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

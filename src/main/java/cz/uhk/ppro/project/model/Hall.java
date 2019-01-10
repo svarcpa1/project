@@ -13,6 +13,8 @@ public class Hall {
     @OneToMany(mappedBy = "hall")
     private List<Workplace> workplaces = new ArrayList<>();
 
+    private String description;
+
     public Hall() {
         id=0;
     }
@@ -43,6 +45,14 @@ public class Hall {
 
     public void setWorkplaces(List<Workplace> workplaces) {
         this.workplaces = workplaces;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

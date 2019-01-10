@@ -8,15 +8,13 @@ import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class TestController {
+public class HallController {
 
     @Autowired
     TestService testService;
@@ -41,18 +39,19 @@ public class TestController {
         return "hallListView";
     }
 
-    @GetMapping("/hall/{id}")
-    public String getHall(Model model, @PathVariable("id") long id){
-        Hall hall = testService.findById(id);
-        List<Hall> haly = new ArrayList<>();
-        haly.add(hall);
-        if(hall==null){
-            throw new RuntimeException("Hall with id: " + id +" not found");
-        }
-        else {
-            model.addAttribute("haly", haly);
-            return "hallListView";
-        }
+
+
+    @GetMapping("/addHall")
+    public String showForm(Model model){
+        model.addAttribute("hall", new Hall());
+        return "addHallForm";
+    }
+
+    @PostMapping("/addHall")
+    public String processForm(@ModelAttribute("hall") Hall hall){
+        //TODO validace
+        testService.saveEntity(hall);
+        return "redirect:/";
     }
 
     @GetMapping("/")
@@ -64,8 +63,11 @@ public class TestController {
 
     private List<Hall> fillList(){
         Hall h = new Hall("plechy");
+        h.setDescription("Pppp lorem ipsum doc addao asdjasjdj Pppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaPppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaPppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaasdoajsdoj asdijasdojia sad");
         Workplace wp1 = new Workplace("pracoviste1");
+        wp1.setDescription("POpois pracoviště sadasd asdhas asdhgasjd asdgasjdg");
         Workplace wp2 = new Workplace("pracoviste2");
+        wp2.setDescription("POpois pracoviště 2 sadasd asdhas asdhgasjd asdgasjdg");
         Document doc1 = new Document("dokument1", "xxx");
         Document doc2 = new Document("dokument2", "xxx");
         Worker wrk1 = new Worker("Pavel", "ŠVARC" , "BOSS");
@@ -91,4 +93,5 @@ public class TestController {
         l.add(h);
         return l;
     }
+
 }

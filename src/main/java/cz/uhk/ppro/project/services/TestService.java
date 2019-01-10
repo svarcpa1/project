@@ -19,12 +19,16 @@ public class TestService {
         return em.find(Hall.class,id);
     }
 
-    public void saveEntity(Object entity) {
-        em.persist(entity);
+    public void saveEntity(Object hall) {
+        em.persist(hall);
     }
 
     public List<Hall> findAllHalls() {
         return em.createQuery("SELECT h FROM Hall h", Hall.class).getResultList();
+    }
+
+    public void updateHall(Hall hall) {
+        em.merge(hall);
     }
 
 }
