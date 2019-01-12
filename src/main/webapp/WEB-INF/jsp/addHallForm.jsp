@@ -30,6 +30,16 @@
     <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
 </head>
 <body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
+            <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
+            <a class="p-2 text-dark" href="#">Přidat dokumentaci</a>
+            <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+        </nav>
+        <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
+    </div>
     <div class="container">
         <form:form modelAttribute="hall" cssClass="form-horizontal">
             <fieldset>
@@ -58,7 +68,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
-                        <button type="submit" id="buttonAdd" name="buttonAdd" class="btn btn-success">Přídat</button>
+                        <button id="buttonBack" name="buttonBack" class="btn btn-info" href="../#">Zpět</button>
+                        <button type="submit" id="buttonAdd" name="buttonAdd" class="btn btn-success">Přidat</button>
                     </div>
                 </div>
 
