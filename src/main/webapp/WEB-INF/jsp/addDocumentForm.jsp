@@ -41,36 +41,58 @@
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
     <div class="container">
-        <form:form modelAttribute="workplace" cssClass="form-horizontal">
+        <form:form modelAttribute="document" cssClass="form-horizontal">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Form Name</legend>
+                <legend>Přidání dokumentace</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinputWorkplaceName">Název pracoviště:</label>
+                    <label class="col-md-4 control-label" for="textinputNameDoc">Název dokumentace:</label>
                     <div class="col-md-4">
-                        <form:input path="name" id="textinputWorkplaceName" name="textinputWorkplaceName" type="text" placeholder="Název pracoviště" class="form-control input-md" required=""/>
-                    </div>
-                </div>
+                        <form:input path="name" id="textinputNameDoc" name="textinputNameDoc" type="text" placeholder="" class="form-control input-md" required=""/>
 
-                <!-- Select Basic -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="selectbasicWorplaceHall">Nachází se v hale:</label>
-                    <div class="col-md-4">
-                        <form:select path="hall.id" id="selectbasicWorplaceHall" name="selectbasicWorplaceHall" class="form-control">
-                            <form:option value="0" label="Zvolte halu" />
-                            <form:options items="${haly}" itemLabel="name" itemValue="id" />
-                        </form:select>
                     </div>
                 </div>
 
                 <!-- Textarea -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textareaWorkplaceDescription">Popis pracoviště:</label>
+                    <label class="col-md-4 control-label" for="textareaDco">Popis dokumentace:</label>
                     <div class="col-md-4">
-                        <form:textarea path="description" class="form-control" id="textareaWorkplaceDescription" name="textareaWorkplaceDescription"/>
+                        <form:textarea path="description" class="form-control" id="textareaDco" name="textareaDco"/>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasicWoker">Vytvořil:</label>
+                    <div class="col-md-4">
+                        <form:select path="workerCreated.id" id="selectbasicWoker" name="selectbasicWoker" class="form-control">
+                            <form:option value="0" label="Zvolte autora" />
+                            <form:options items="${workers}" itemLabel="name" itemValue="id" />
+                        </form:select>
+
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasicWorkplace">Pracoviště:</label>
+                    <div class="col-md-4">
+
+                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace" class="form-control">
+                            <form:option value="0" label="Zvolte pracoviště" />
+                            <form:options items="${workplaces}" itemLabel="name" itemValue="id" />
+                        </form:select>
+                    </div>
+                </div>
+
+                <!-- File Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="filebuttonDoc">Vybrat dokumentaci:</label>
+                    <div class="col-md-4">
+                        <input id="filebuttonDoc" name="filebuttonDoc" class="input-file" type="file">
                     </div>
                 </div>
 
@@ -85,6 +107,7 @@
 
             </fieldset>
         </form:form>
+
 
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">

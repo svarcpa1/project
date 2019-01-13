@@ -25,21 +25,41 @@ public class WorkplaceController {
     }
 
     @PostMapping("/addWorkplace")
-    public String processForm(@ModelAttribute("workplace") Workplace workplace){
+    public String processForm(@ModelAttribute("workplace") Workplace workplace, @RequestParam String action){
         //TODO validace
         //TODO workspace service
-        Hall hall = testService.findById(workplace.getHall().getId());
-        workplace.setHall(hall);
-        hall.getWorkplaces().add(workplace);
 
+        if( action.equals("save") ){
+            Hall hall = testService.findHallById(workplace.getHall().getId());
+            workplace.setHall(hall);
+            hall.getWorkplaces().add(workplace);
+
+            testService.updateHall(hall);
+            return "redirect:/";
+        }
+        // cancel
+        else {
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping("hall/{hall.id}/deleteWorkplace/{id}")
+    public String deleteWorkplaceId(@ModelAttribute("workplace") Workplace workplace, @PathVariable("id") long id, @PathVariable("hall.id") long hallId){
+        Hall hall = testService.findHallById(hallId);
+        workplace = testService.findWorkplaceById(id);
+
+        hall.removeWorkplace(workplace);
+
+        System.out.println("Hala: " + hall.getId());
+        System.out.println("Workplace: " + workplace.getId());
         testService.updateHall(hall);
-        testService.saveEntity(workplace);
         return "redirect:/";
+
     }
 
     @GetMapping("/hall/{id}")
     public String getHall(Model model, @PathVariable("id") long id){
-        Hall hall = testService.findById(id);
+        Hall hall = testService.findHallById(id);
 
         if(hall==null){
             throw new RuntimeException("Hall with id: " + id +" not found");

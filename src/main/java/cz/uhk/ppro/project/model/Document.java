@@ -17,6 +17,17 @@ public class Document {
     private Date dateCreated;
     private Date dateExpired;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
+
     public Document() {
         id=0;
     }

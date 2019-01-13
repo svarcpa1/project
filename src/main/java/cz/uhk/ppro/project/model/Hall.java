@@ -10,7 +10,7 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @OneToMany(mappedBy = "hall")
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Workplace> workplaces = new ArrayList<>();
 
     private String description;
@@ -53,6 +53,13 @@ public class Hall {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void removeWorkplace(Workplace workplace) {
+        workplaces.remove(workplace);
+        if (workplace != null) {
+            workplace.setHall(null);
+        }
     }
 }
 

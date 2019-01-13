@@ -24,15 +24,6 @@ public class HallController {
         List<Hall> haly = fillList();
         for (Hall hala:haly) {
             testService.saveEntity(hala);
-            for (Workplace workplace: hala.getWorkplaces()) {
-                testService.saveEntity(workplace);
-                for (Worker worker: workplace.getWorkers()) {
-                    testService.saveEntity(worker);
-                }
-                for (Document document: workplace.getDocuments()) {
-                    testService.saveEntity(document);
-                }
-            }
         }
 
         model.addAttribute("haly", haly);
@@ -48,10 +39,26 @@ public class HallController {
     }
 
     @PostMapping("/addHall")
-    public String processForm(@ModelAttribute("hall") Hall hall){
+    public String processForm(@ModelAttribute("hall") Hall hall, @RequestParam String action){
         //TODO validace
-        testService.saveEntity(hall);
+
+        if( action.equals("save") ){
+            testService.saveEntity(hall);
+            return "redirect:/";
+        }
+        // cancel
+        else {
+            return "redirect:/";
+        }
+
+    }
+
+    @RequestMapping("/deleteHall/{id}")
+    public String deleteHallId(@ModelAttribute("hall") Hall hall, @PathVariable("id") long id){
+
+        testService.deleteHallById(id);
         return "redirect:/";
+
     }
 
     @GetMapping("/")

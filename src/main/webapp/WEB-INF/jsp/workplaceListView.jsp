@@ -34,22 +34,22 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
         <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-        <a class="p-2 text-dark" href="#">Přidat dokumentaci</a>
+        <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
         <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Haly</h1>
-    <p class="lead">Přehled hal</p>
+    <h1 class="display-4">Hala: ${hala.name} (${hala.id})</h1>
+    <p class="lead">Přehled pracovišť</p>
 </div>
 
 <div class="container">
 
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
-            <div class="card-header">
+            <div class="card-header bg-primary text-white">
                 <h4 class="my-0 font-weight-normal">${hala.name} (${hala.id})</h4>
             </div>
             <div class="card-body">
@@ -64,7 +64,7 @@
     <div class="card-deck mb-3 text-center">
         <c:forEach items="${hala.workplaces}" var="workplace">
             <div class="card mb-4 shadow-sm">
-                <div class="card-header">
+                <div class="card-header bg-success text-white">
                     <h4 class="my-0 font-weight-normal">${workplace.name} (${workplace.id})</h4>
                 </div>
                 <div class="card-body">
@@ -72,7 +72,8 @@
                         <li>${workplace.description}</li>
 
                     </ul>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Prozkoumat dál</button></a>
+                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště</button></a>
+                    <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button></a>
                 </div>
             </div>
         </c:forEach>

@@ -68,8 +68,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
-                        <button id="buttonBack" name="buttonBack" class="btn btn-info" href="../#">Zpět</button>
-                        <button type="submit" id="buttonAdd" name="buttonAdd" class="btn btn-success">Přidat</button>
+                        <button id="buttonBack" name="action" class="btn btn-info" value="cancel">Zpět</button>
+                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save">Přidat</button>
                     </div>
                 </div>
 
