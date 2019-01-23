@@ -22,6 +22,14 @@ public class TestService {
         return em.find(Hall.class,id);
     }
 
+    public Worker findWorkerById(long id) {
+        return em.find(Worker.class,id);
+    }
+
+    public Document findDocumentById(long id) {
+        return em.find(Document.class,id);
+    }
+
     public Workplace findWorkplaceById(long id) {
         return em.find(Workplace.class,id);
     }

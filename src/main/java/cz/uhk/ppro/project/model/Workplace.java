@@ -74,4 +74,18 @@ public class Workplace {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void removeWorker(Worker worker) {
+        workers.remove(worker);
+        if (worker != null) {
+            worker.setWorkplace(null);
+        }
+    }
+
+    public void removeDocument(Document document) {
+        documents.remove(document);
+        if (document != null) {
+            document.setWorkplace(null);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package cz.uhk.ppro.project.controllers;
 
+import cz.uhk.ppro.project.model.Document;
 import cz.uhk.ppro.project.model.Hall;
 import cz.uhk.ppro.project.model.Worker;
 import cz.uhk.ppro.project.model.Workplace;
@@ -7,10 +8,7 @@ import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +44,23 @@ public class WorkerController {
         else {
             return "redirect:/";
         }
+    }
+
+    @RequestMapping("/deleteWorker/{id}")
+    public String deleteWorkerId(@ModelAttribute("worker") Worker worker, @PathVariable("id") long id){
+        worker = testService.findWorkerById(id);
+        Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
+        Hall hall = testService.findHallById(workplace.getHall().getId());
+
+        workplace.removeWorker(worker);
+        List<Document> documents = worker.getDocumentsCreated();
+        for (Document document: documents) {
+            document.setWorkerCreated(null);
+        }
+
+        testService.updateHall(hall);
+        return "redirect:/";
+
     }
 
 }

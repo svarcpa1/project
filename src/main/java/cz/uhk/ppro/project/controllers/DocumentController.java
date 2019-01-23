@@ -48,4 +48,22 @@ public class DocumentController {
         }
     }
 
+    @RequestMapping("/deleteDocument/{id}")
+    public String deleteDocumentId(@ModelAttribute("document") Document document, @PathVariable("id") long id){
+        document = testService.findDocumentById(id);
+        Workplace workplace = testService.findWorkplaceById(document.getWorkplace().getId());
+        Hall hall = testService.findHallById(workplace.getHall().getId());
+
+        if(document.getWorkerCreated() != null){
+            Worker worker = testService.findWorkerById(document.getWorkerCreated().getId());
+            worker.removeDocument(document);
+        }
+        workplace.removeDocument(document);
+
+
+        testService.updateHall(hall);
+        return "redirect:/";
+
+    }
+
 }

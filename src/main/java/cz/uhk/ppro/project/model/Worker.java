@@ -78,4 +78,11 @@ public class Worker {
     public void setDocumentsCreated(List<Document> documentsCreated) {
         this.documentsCreated = documentsCreated;
     }
+
+    public void removeDocument(Document document) {
+        documentsCreated.remove(document);
+        if (document != null) {
+            document.setWorkerCreated(null);
+        }
+    }
 }
