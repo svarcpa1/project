@@ -13,18 +13,6 @@
     <!-- Bootstrap core CSS -->
     <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
     <!-- Custom styles for this template -->
     <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
 </head>
@@ -72,8 +60,8 @@
                         <li>${worker.position}</li>
 
                     </ul>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
+                    <a style="display: none;" href="/worker/${worker.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
+                    <a href="/deleteWorker/${worker.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
                 </div>
             </div>
         </c:forEach>
@@ -90,8 +78,8 @@
                         <li>Vytvořil: ${document.workerCreated.firstName} ${document.workerCreated.surName}</li>
 
                     </ul>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
+                    <a style="display: none;" href="/document/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
+                    <a href="/deleteDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
                 </div>
             </div>
         </c:forEach>
