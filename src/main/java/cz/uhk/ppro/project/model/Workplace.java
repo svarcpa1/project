@@ -12,9 +12,9 @@ public class Workplace {
     private String name;
     @ManyToOne
     private Hall hall;
-    @OneToMany(mappedBy = "workplace")
+    @OneToMany(mappedBy = "workplace", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Worker> workers = new ArrayList<>();
-    @OneToMany(mappedBy = "workplace")
+    @OneToMany(mappedBy = "workplace", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
 
     private String description;

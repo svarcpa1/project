@@ -35,7 +35,7 @@
         <a class="p-2 text-dark" href="addHall">Přidat halu</a>
         <a class="p-2 text-dark" href="addWorkplace">Přidat pracoviště</a>
         <a class="p-2 text-dark" href="addDocument">Přidat dokumentaci</a>
-        <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+        <a class="p-2 text-dark" href="addWorker">Přidat zaměstnance</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
 </div>

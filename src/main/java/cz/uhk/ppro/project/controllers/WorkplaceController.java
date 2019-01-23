@@ -70,4 +70,17 @@ public class WorkplaceController {
         }
     }
 
+    @GetMapping("/hall/{hall.id}/workplace/{id}")
+    public String getWorkplace(Model model, @PathVariable("id") long id,  @PathVariable("hall.id") long hallId){
+        Workplace workplace = testService.findWorkplaceById(id);
+
+        if(workplace==null){
+            throw new RuntimeException("Workplace with id: " + id +" not found");
+        }
+        else {
+            model.addAttribute("workplace", workplace);
+            return "documentWorkerListView";
+        }
+    }
+
 }

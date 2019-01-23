@@ -35,8 +35,8 @@
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-            <a class="p-2 text-dark" href="#">Přidat dokumentaci</a>
-            <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+            <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
+            <a class="p-2 text-dark" href="../addWorker">Přidat zaměstnance</a>
         </nav>
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
@@ -52,7 +52,7 @@
                     <label class="col-md-4 control-label" for="textInputName">Název haly:</label>
                     <div class="col-md-4">
 
-                        <form:input path="name" id="textInputName" name="textInputName" type="text" placeholder="Zadejte jméno název haly " class="form-control input-md" required=""/>
+                        <form:input path="name" id="textInputName" name="textInputName" type="text" placeholder="Zadejte název haly " class="form-control input-md" required=""/>
                     </div>
                 </div>
 

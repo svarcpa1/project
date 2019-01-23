@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Firma - seznam hal</title>
+    <title>Firma - detail haly - ${hala.name}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -35,7 +35,7 @@
         <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
         <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
         <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
-        <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+        <a class="p-2 text-dark" href="../addWorker">Přidat zaměstnance</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
 </div>
@@ -72,7 +72,7 @@
                         <li>${workplace.description}</li>
 
                     </ul>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště</button></a>
+                    <a href="${workplace.hall.id}/workplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště</button></a>
                     <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button></a>
                 </div>
             </div>

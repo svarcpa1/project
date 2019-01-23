@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Firma - Přidat halu</title>
+    <title>Firma - Přidat dokumentaci</title>
 
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -35,8 +35,8 @@
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-            <a class="p-2 text-dark" href="#">Přidat dokumentaci</a>
-            <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+            <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
+            <a class="p-2 text-dark" href="../addWorker">Přidat zaměstnance</a>
         </nav>
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
@@ -70,7 +70,7 @@
                     <div class="col-md-4">
                         <form:select path="workerCreated.id" id="selectbasicWoker" name="selectbasicWoker" class="form-control">
                             <form:option value="0" label="Zvolte autora" />
-                            <form:options items="${workers}" itemLabel="name" itemValue="id" />
+                            <form:options items="${workers}" itemLabel="fullName" itemValue="id" />
                         </form:select>
 
                     </div>

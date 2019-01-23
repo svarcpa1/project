@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Firma - seznam hal</title>
+    <title>Firma - detail pracoviště - ${workplace.name}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -32,29 +32,29 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
-        <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-        <a class="p-2 text-dark" href="#">Přidat dokumentaci</a>
-        <a class="p-2 text-dark" href="#">Přidat zaměstnance</a>
+        <a class="p-2 text-dark" href="../../../addHall">Přidat halu</a>
+        <a class="p-2 text-dark" href="../../../addWorkplace">Přidat pracoviště</a>
+        <a class="p-2 text-dark" href="../../../addDocument">Přidat dokumentaci</a>
+        <a class="p-2 text-dark" href="../../../addWorker">Přidat zaměstnance</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Workplace: ${workplace.name} (${workplace.id})</h1>
-    <p class="lead">Přehled pracovišť</p>
+    <h1 class="display-4">Pracoviště: ${workplace.name} (${workplace.id})</h1>
+    <p class="lead">Přehled zaměstanců a dokumentace</p>
 </div>
 
 <div class="container">
 
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h4 class="my-0 font-weight-normal">${hala.name} (${hala.id})</h4>
+            <div class="card-header bg-success text-white">
+                <h4 class="my-0 font-weight-normal">${workplace.name} (${workplace.id})</h4>
             </div>
             <div class="card-body">
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>${hala.description}</li>
+                    <li>${workplace.description}</li>
 
                 </ul>
             </div>
@@ -62,18 +62,36 @@
     </div>
 
     <div class="card-deck mb-3 text-center">
-        <c:forEach items="${hala.workplaces}" var="workplace">
+        <c:forEach items="${workplace.workers}" var="worker">
             <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-success text-white">
-                    <h4 class="my-0 font-weight-normal">${workplace.name} (${workplace.id})</h4>
+                <div class="card-header bg-warning text-white">
+                    <h4 class="my-0 font-weight-normal">${worker.firstName} ${worker.surName} (${worker.id})</h4>
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>${workplace.description}</li>
+                        <li>${worker.position}</li>
 
                     </ul>
-                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště</button></a>
-                    <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button></a>
+                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
+                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+
+    <div class="card-deck mb-3 text-center">
+        <c:forEach items="${workplace.documents}" var="document">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="my-0 font-weight-normal">${document.name} (${document.id})</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Vytvořil: ${document.workerCreated.firstName} ${document.workerCreated.surName}</li>
+
+                    </ul>
+                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
+                    <a href=""><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
                 </div>
             </div>
         </c:forEach>

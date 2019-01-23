@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Firma - Přidat halu</title>
+    <title>Firma - Přidat zaměstnance</title>
 
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -41,36 +41,47 @@
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
     <div class="container">
-        <form:form modelAttribute="workplace" cssClass="form-horizontal">
+        <form:form modelAttribute="worker" cssClass="form-horizontal">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Přidání pracoviště</legend>
+                <legend>Přidání zaměstnance</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinputWorkplaceName">Název pracoviště:</label>
+                    <label class="col-md-4 control-label" for="textinputNameDoc">Jméno zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:input path="name" id="textinputWorkplaceName" name="textinputWorkplaceName" type="text" placeholder="Název pracoviště" class="form-control input-md" required=""/>
+                        <form:input path="firstName" id="textinputNameDoc" name="textinputNameDoc" type="text" placeholder="" class="form-control input-md" required=""/>
+
                     </div>
                 </div>
 
-                <!-- Select Basic -->
+                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="selectbasicWorplaceHall">Nachází se v hale:</label>
+                    <label class="col-md-4 control-label" for="textinputSurname">Příjmení zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:select path="hall.id" id="selectbasicWorplaceHall" name="selectbasicWorplaceHall" class="form-control">
-                            <form:option value="0" label="Zvolte halu" />
-                            <form:options items="${haly}" itemLabel="name" itemValue="id" />
-                        </form:select>
+                        <form:input path="surName" id="textinputSurname" name="textinputSurname" type="text" placeholder="" class="form-control input-md" required=""/>
+
                     </div>
                 </div>
 
                 <!-- Textarea -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textareaWorkplaceDescription">Popis pracoviště:</label>
+                    <label class="col-md-4 control-label" for="textareaDco">Pracovní pozice zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:textarea path="description" class="form-control" id="textareaWorkplaceDescription" name="textareaWorkplaceDescription"/>
+                        <form:textarea path="position" class="form-control" id="textareaDco" name="textareaDco"/>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasicWorkplace">Pracoviště:</label>
+                    <div class="col-md-4">
+
+                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace" class="form-control">
+                            <form:option value="0" label="Zvolte pracoviště" />
+                            <form:options items="${workplaces}" itemLabel="name" itemValue="id" />
+                        </form:select>
                     </div>
                 </div>
 
@@ -85,6 +96,7 @@
 
             </fieldset>
         </form:form>
+
 
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">

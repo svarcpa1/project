@@ -10,7 +10,7 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
-    private String sureName;
+    private String surName;
     @ManyToOne
     private Workplace workplace;
     private String position;
@@ -21,9 +21,9 @@ public class Worker {
         id=0;
     }
 
-    public Worker(String firstName, String sureName, String position) {
+    public Worker(String firstName, String surName, String position) {
         this.firstName = firstName;
-        this.sureName = sureName;
+        this.surName = surName;
         this.position = position;
     }
 
@@ -43,12 +43,16 @@ public class Worker {
         this.firstName = firstName;
     }
 
-    public String getSureName() {
-        return sureName;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setSureName(String sureName) {
-        this.sureName = sureName;
+    public String getFullName() {
+        return firstName + " " + surName;
+    }
+
+    public void setSurName(String sureName) {
+        this.surName = sureName;
     }
 
     public Workplace getWorkplace() {
