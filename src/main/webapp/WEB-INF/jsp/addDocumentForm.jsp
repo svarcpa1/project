@@ -16,6 +16,20 @@
 
     <!-- Custom styles for this template -->
     <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+            $( "#datepicker2" ).datepicker();
+        } );
+    </script>
+
+
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -73,6 +87,20 @@
                             <form:option value="0" label="Zvolte pracoviště" />
                             <form:options items="${workplaces}" itemLabel="name" itemValue="id" />
                         </form:select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinputDateCreated">Datum platnosti od:</label>
+                    <div class="col-md-4">
+                        <form:input path="dateCreated" type="text" id="datepicker" name="textinputDateCreated" class="form-control input-md" required=""/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinputDateExpired">Datum platnosti do:</label>
+                    <div class="col-md-4">
+                        <form:input path="dateExpired" type="text" id="datepicker2" name="textinputDateExpired" class="form-control input-md" required=""/>
                     </div>
                 </div>
 

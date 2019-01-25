@@ -76,7 +76,8 @@
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Vytvořil: ${document.workerCreated.firstName} ${document.workerCreated.surName}</li>
-
+                        <li>Datum platnosti od: ${document.dateCreated}</li>
+                        <li>Datum platnosti do: ${document.dateExpired}</li>
                     </ul>
                     <a style="display: none;" href="/document/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
                     <a href="/deleteDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
