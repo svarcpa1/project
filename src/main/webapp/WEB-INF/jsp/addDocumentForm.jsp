@@ -108,7 +108,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="filebuttonDoc">Vybrat dokumentaci:</label>
                     <div class="col-md-4">
-                        <input id="filebuttonDoc" name="filebuttonDoc" class="input-file" type="file">
+                        <input id="filebuttonDoc" name="file" class="input-file" type="file" accept="application/pdf" />
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
                         <button id="buttonBack" name="action" class="btn btn-info" value="cancel">Zpět</button>
-                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save">Přidat</button>
+                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" >Přidat</button>
                     </div>
                 </div>
 

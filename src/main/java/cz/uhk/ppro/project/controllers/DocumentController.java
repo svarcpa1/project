@@ -28,7 +28,7 @@ public class DocumentController {
         return "addDocumentForm";
     }
 
-    @PostMapping("/addDocument")
+    @PostMapping("/addDocument2")
     public String processForm(@ModelAttribute("document") Document document, @RequestParam String action){
         //TODO validace
 
