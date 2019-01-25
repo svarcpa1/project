@@ -43,7 +43,7 @@
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
     <div class="container">
-        <form:form modelAttribute="document" cssClass="form-horizontal">
+        <form:form modelAttribute="document" cssClass="form-horizontal" enctype="multipart/form-data">
             <fieldset>
 
                 <!-- Form Name -->
@@ -117,13 +117,15 @@
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
                         <button id="buttonBack" name="action" class="btn btn-info" value="cancel">Zpět</button>
-                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" >Přidat</button>
+                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save" >Přidat</button>
                     </div>
                 </div>
 
             </fieldset>
         </form:form>
 
+
+        <script src="/js/main.js" ></script>
 
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
