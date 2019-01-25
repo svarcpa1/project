@@ -79,7 +79,7 @@
                         <li>Datum platnosti od: ${document.dateCreated}</li>
                         <li>Datum platnosti do: ${document.dateExpired}</li>
                     </ul>
-                    <a style="display: none;" href="/document/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
+                    <a href="/loadDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
                     <a href="/deleteDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
                 </div>
             </div>

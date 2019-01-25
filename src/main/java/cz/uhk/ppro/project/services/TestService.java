@@ -62,4 +62,8 @@ public class TestService {
         Hall hall = em.find(Hall.class,id);
         em.remove(hall);
     }
+
+    public byte[] loadDocumentFileById(long documentId){
+        return em.find(Document.class,documentId).getFileData();
+    }
 }

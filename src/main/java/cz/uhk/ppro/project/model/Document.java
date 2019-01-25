@@ -14,6 +14,17 @@ public class Document {
     @ManyToOne
     private Worker workerCreated;
     private String filePath;
+    @Lob
+    private byte[] fileData;
+
+    public byte[] getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(byte[] fileData) {
+        this.fileData = fileData;
+    }
+
     private Date dateCreated;
     private Date dateExpired;
 
