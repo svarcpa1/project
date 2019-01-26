@@ -57,7 +57,7 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>${worker.position}</li>
+                        <li>${worker.role.name}</li>
 
                     </ul>
                     <a style="display: none;" href="/worker/${worker.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>

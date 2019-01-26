@@ -1,20 +1,12 @@
 package cz.uhk.ppro.project.model;
 
 import cz.uhk.ppro.project.validation.WorkerConstraint;
-import cz.uhk.ppro.project.validation.WorkerValidator;
 import cz.uhk.ppro.project.validation.WorkplaceConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.util.Date;
 
 @Entity
@@ -29,7 +21,7 @@ public class Document {
     @ManyToOne
     private Workplace workplace;
 
-    //@WorkerConstraint
+    @WorkerConstraint
     @ManyToOne
     private Worker workerCreated;
 

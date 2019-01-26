@@ -13,9 +13,6 @@ public class Role {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<Worker> worker = new ArrayList<>();
-
     public Role() {
         id=0;
     }
@@ -39,11 +36,4 @@ public class Role {
         this.name = name;
     }
 
-    public List<Worker> getWorker() {
-        return worker;
-    }
-
-    public void setWorker(List<Worker> worker) {
-        this.worker = worker;
-    }
 }

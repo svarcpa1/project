@@ -83,46 +83,23 @@ public class HallController {
         wp1.setDescription("POpois pracoviště sadasd asdhas asdhgasjd asdgasjdg");
         Workplace wp2 = new Workplace("pracoviste2");
         wp2.setDescription("POpois pracoviště 2 sadasd asdhas asdhgasjd asdgasjdg");
-        Document doc1 = new Document("dokument1", "xxx");
-        Document doc2 = new Document("dokument2", "xxx");
 
         Role rol1 = new Role("Admin");
         Role rol2 = new Role("Master");
-
         Worker wrk1 = new Worker("Pavel", "ŠVARC" , rol1);
         Worker wrk2 = new Worker("Ota", "Černý" , rol2);
-
-        doc1.setDateCreated( new GregorianCalendar(2019, 1, 26).getTime());
-        doc1.setDateExpired( new GregorianCalendar(2019, 7, 1).getTime());
-        doc2.setDateCreated( new GregorianCalendar(2019, 1, 26).getTime());
-        doc2.setDateExpired( new GregorianCalendar(2019, 7, 1).getTime());
-
-        rol1.getWorker().add(wrk1);
-        rol2.getWorker().add(wrk2);
 
         h.getWorkplaces().add(wp1);
         h.getWorkplaces().add(wp2);
         wp1.setHall(h);
         wp2.setHall(h);
-
-        doc1.setWorkerCreated(wrk1);
-        doc2.setWorkerCreated(wrk2);
-        doc1.setWorkplace(wp1);
-        doc2.setWorkplace(wp2);
         wp1.getWorkers().add(wrk1);
         wp2.getWorkers().add(wrk2);
         wrk1.setWorkplace(wp1);
         wrk2.setWorkplace(wp2);
-        wrk1.getDocumentsCreated().add(doc1);
-        wrk2.getDocumentsCreated().add(doc2);
 
-        wp1.getDocuments().add(doc1);
-        wp2.getDocuments().add(doc2);
         List<Hall> l = new ArrayList<>();
         l.add(h);
-
-/*        testService.saveEntity(rol1);
-        testService.saveEntity(rol2);*/
 
         return l;
     }

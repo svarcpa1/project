@@ -25,7 +25,7 @@ public class Worker {
     private String password;
     private String login;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Role role;
 
     public Worker() {
