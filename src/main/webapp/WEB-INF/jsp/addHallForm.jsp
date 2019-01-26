@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./">Firma</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
@@ -39,8 +39,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textInputName">Název haly:</label>
                     <div class="col-md-4">
-
-                        <form:input path="name" id="textInputName" name="textInputName" type="text" placeholder="Zadejte název haly " class="form-control input-md" required=""/>
+                        <form:input path="name" id="textInputName" name="textInputName" type="text"
+                                    placeholder="Zadejte název haly " class="form-control input-md" required=""/>
+                        <form:errors path="name" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -48,7 +49,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textareaDescription">Popis haly</label>
                     <div class="col-md-4">
-                        <form:textarea path="description" class="form-control" id="textareaDescription" name="textareaDescription"/>
+                        <form:textarea path="description" class="form-control" id="textareaDescription"
+                                       name="textareaDescription"/>
                     </div>
                 </div>
 
@@ -57,7 +59,8 @@
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
                         <button id="buttonBack" name="action" class="btn btn-info" value="cancel">Zpět</button>
-                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save">Přidat</button>
+                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save">
+                            Přidat</button>
                     </div>
                 </div>
 

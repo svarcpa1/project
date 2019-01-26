@@ -1,6 +1,20 @@
 package cz.uhk.ppro.project.model;
 
+import cz.uhk.ppro.project.validation.WorkerConstraint;
+import cz.uhk.ppro.project.validation.WorkerValidator;
+import cz.uhk.ppro.project.validation.WorkplaceConstraint;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.Constraint;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.Date;
 
 @Entity
@@ -8,14 +22,27 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotEmpty
     private String name;
+
+    @WorkplaceConstraint
     @ManyToOne
     private Workplace workplace;
+
+    @WorkerConstraint
     @ManyToOne
     private Worker workerCreated;
+
     private String filePath;
     @Lob
     private byte[] fileData;
+    @NotNull
+    @DateTimeFormat(pattern="MM/dd/YY")
+    private Date dateCreated;
+    @NotNull
+    @DateTimeFormat(pattern="MM/dd/YY")
+    private Date dateExpired;
+    private String description;
 
     public byte[] getFileData() {
         return fileData;
@@ -25,9 +52,6 @@ public class Document {
         this.fileData = fileData;
     }
 
-    private Date dateCreated;
-    private Date dateExpired;
-
     public String getDescription() {
         return description;
     }
@@ -35,9 +59,6 @@ public class Document {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private String description;
-
 
     public Document() {
         id=0;

@@ -12,10 +12,11 @@
     <title>Firma - Přidat dokumentaci</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
+    <link href="src/main/java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -33,7 +34,7 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./">Firma</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
@@ -43,7 +44,7 @@
         <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
     <div class="container">
-        <form:form modelAttribute="document" cssClass="form-horizontal" enctype="multipart/form-data">
+        <form:form modelAttribute="document" cssClass="form-horizontal" enctype="multipart/form-data" method="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -53,8 +54,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputNameDoc">Název dokumentace:</label>
                     <div class="col-md-4">
-                        <form:input path="name" id="textinputNameDoc" name="textinputNameDoc" type="text" placeholder="" class="form-control input-md" required=""/>
-
+                        <form:input path="name" id="textinputNameDoc" name="textinputNameDoc" type="text"
+                                    placeholder="" class="form-control input-md" required=""/>
+                        <form:errors path="name" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -70,10 +72,12 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasicWoker">Vytvořil:</label>
                     <div class="col-md-4">
-                        <form:select path="workerCreated.id" id="selectbasicWoker" name="selectbasicWoker" class="form-control">
+                        <form:select path="workerCreated.id" id="selectbasicWoker" name="selectbasicWoker"
+                                     class="form-control" required="">
                             <form:option value="0" label="Zvolte autora" />
                             <form:options items="${workers}" itemLabel="fullName" itemValue="id" />
                         </form:select>
+                        <form:errors path="workerCreated" cssStyle="color: salmon; font-style: italic;"/>
 
                     </div>
                 </div>
@@ -83,24 +87,31 @@
                     <label class="col-md-4 control-label" for="selectbasicWorkplace">Pracoviště:</label>
                     <div class="col-md-4">
 
-                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace" class="form-control">
+                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace"
+                                     class="form-control" required="" >
                             <form:option value="0" label="Zvolte pracoviště" />
                             <form:options items="${workplaces}" itemLabel="name" itemValue="id" />
                         </form:select>
+                        <form:errors path="workplace" cssStyle="color: salmon; font-style: italic;"/>
+
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputDateCreated">Datum platnosti od:</label>
                     <div class="col-md-4">
-                        <form:input path="dateCreated" type="text" id="datepicker" name="textinputDateCreated" class="form-control input-md" required=""/>
+                        <form:input path="dateCreated" autocomplete="off" type="text" id="datepicker" name="textinputDateCreated"
+                                    class="form-control input-md" required=""/>
+                        <form:errors path="dateCreated" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputDateExpired">Datum platnosti do:</label>
                     <div class="col-md-4">
-                        <form:input path="dateExpired" type="text" id="datepicker2" name="textinputDateExpired" class="form-control input-md" required=""/>
+                        <form:input path="dateExpired" autocomplete="off" type="text" id="datepicker2" name="textinputDateExpired"
+                                    class="form-control input-md" required=""/>
+                        <form:errors path="dateExpired" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -109,6 +120,7 @@
                     <label class="col-md-4 control-label" for="filebuttonDoc">Vybrat dokumentaci:</label>
                     <div class="col-md-4">
                         <input id="filebuttonDoc" name="file" class="input-file" type="file" accept="application/pdf" />
+
                     </div>
                 </div>
 
@@ -117,7 +129,8 @@
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">
                         <button id="buttonBack" name="action" class="btn btn-info" value="cancel">Zpět</button>
-                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success" value="save">Přidat</button>
+                        <button type="submit" id="buttonAdd" name="action" class="btn btn-success"
+                                value="save">Přidat</button>
                     </div>
                 </div>
 

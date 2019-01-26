@@ -1,6 +1,8 @@
 package cz.uhk.ppro.project.model;
 
+import cz.uhk.ppro.project.validation.WorkplaceConstraint;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,11 @@ public class Worker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String surName;
+    @WorkplaceConstraint
     @ManyToOne
     private Workplace workplace;
     private String position;

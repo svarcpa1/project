@@ -1,6 +1,9 @@
 package cz.uhk.ppro.project.model;
 
+import cz.uhk.ppro.project.validation.HallConstraint;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,9 @@ public class Workplace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotEmpty
     private String name;
+    @HallConstraint
     @ManyToOne
     private Hall hall;
     @OneToMany(mappedBy = "workplace", cascade = CascadeType.ALL, orphanRemoval = true)

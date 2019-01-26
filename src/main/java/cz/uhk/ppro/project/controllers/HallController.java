@@ -8,8 +8,11 @@ import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,27 +33,32 @@ public class HallController {
         return "hallListView";
     }
 
-
-
     @GetMapping("/addHall")
     public String showForm(Model model){
-        model.addAttribute("hall", new Hall());
+
+        if(!model.containsAttribute("hall")) model.addAttribute("hall", new Hall());
+
         return "addHallForm";
     }
 
     @PostMapping("/addHall")
-    public String processForm(@ModelAttribute("hall") Hall hall, @RequestParam String action){
-        //TODO validace
+    public String processForm(@ModelAttribute("hall") @Valid Hall hall, BindingResult result,
+                              @RequestParam String action, RedirectAttributes attributes){
 
-        if( action.equals("save") ){
-            testService.saveEntity(hall);
-            return "redirect:/";
+        if(result.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
+            attributes.addFlashAttribute("hall", hall);
+            return "redirect:/addHall";
+        }else {
+            if( action.equals("save") ){
+                testService.saveEntity(hall);
+                return "redirect:/";
+            }
+            // cancel
+            else {
+                return "redirect:/";
+            }
         }
-        // cancel
-        else {
-            return "redirect:/";
-        }
-
     }
 
     @RequestMapping("/deleteHall/{id}")
@@ -70,7 +78,9 @@ public class HallController {
 
     private List<Hall> fillList(){
         Hall h = new Hall("plechy");
-        h.setDescription("Pppp lorem ipsum doc addao asdjasjdj Pppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaPppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaPppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaasdoajsdoj asdijasdojia sad");
+        h.setDescription("Pppp lorem ipsum doc addao asdjasjdj Pppp lorem ipsum doc addao asdjasjdj asdoajsdoj " +
+                "asdijasdojiaPppp lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaPppp " +
+                "lorem ipsum doc addao asdjasjdj asdoajsdoj asdijasdojiaasdoajsdoj asdijasdojia sad");
         Workplace wp1 = new Workplace("pracoviste1");
         wp1.setDescription("POpois pracoviště sadasd asdhas asdhgasjd asdgasjdg");
         Workplace wp2 = new Workplace("pracoviste2");

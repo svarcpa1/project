@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./">Firma</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
@@ -38,8 +38,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputNameDoc">Jméno zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:input path="firstName" id="textinputNameDoc" name="textinputNameDoc" type="text" placeholder="" class="form-control input-md" required=""/>
-
+                        <form:input path="firstName" id="textinputNameDoc" name="textinputNameDoc" type="text"
+                                    placeholder="" class="form-control input-md" required=""/>
+                        <form:errors path="firstName" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -47,8 +48,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputSurname">Příjmení zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:input path="surName" id="textinputSurname" name="textinputSurname" type="text" placeholder="" class="form-control input-md" required=""/>
-
+                        <form:input path="surName" id="textinputSurname" name="textinputSurname" type="text"
+                                    placeholder="" class="form-control input-md" required=""/>
+                        <form:errors path="surName" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -64,11 +66,12 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasicWorkplace">Pracoviště:</label>
                     <div class="col-md-4">
-
-                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace" class="form-control">
+                        <form:select path="workplace.id" id="selectbasicWorkplace" name="selectbasicWorkplace"
+                                     class="form-control">
                             <form:option value="0" label="Zvolte pracoviště" />
                             <form:options items="${workplaces}" itemLabel="name" itemValue="id" />
                         </form:select>
+                        <form:errors path="workplace" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 

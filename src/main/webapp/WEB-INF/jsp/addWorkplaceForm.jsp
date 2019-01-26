@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Firma</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./">Firma</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
             <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
@@ -39,7 +39,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputWorkplaceName">Název pracoviště:</label>
                     <div class="col-md-4">
-                        <form:input path="name" id="textinputWorkplaceName" name="textinputWorkplaceName" type="text" placeholder="Název pracoviště" class="form-control input-md" required=""/>
+                        <form:input path="name" id="textinputWorkplaceName" name="textinputWorkplaceName" type="text"
+                                    placeholder="Název pracoviště" class="form-control input-md" required=""/>
+                        <form:errors path="name" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 
@@ -51,6 +53,7 @@
                             <form:option value="0" label="Zvolte halu" />
                             <form:options items="${haly}" itemLabel="name" itemValue="id" />
                         </form:select>
+                        <form:errors path="hall" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
 

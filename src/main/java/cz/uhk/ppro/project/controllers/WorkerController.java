@@ -8,8 +8,11 @@ import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,29 +23,38 @@ public class WorkerController {
 
     @GetMapping("/addWorker")
     public String showForm(Model model){
-        model.addAttribute("worker", new Worker());
+
+        if(!model.containsAttribute("worker")) model.addAttribute("worker", new Worker());
+
         List<Workplace> workplaces = testService.findAllWorkplaces();
         model.addAttribute("workplaces", workplaces);
+
         return "addWorkerForm";
     }
 
     @PostMapping("/addWorker")
-    public String processForm(@ModelAttribute("worker") Worker worker, @RequestParam String action){
-        //TODO validace
+    public String processForm(@ModelAttribute("worker") @Valid Worker worker, BindingResult result,
+                              @RequestParam String action, RedirectAttributes attributes){
 
-        if( action.equals("save") ){
+        if (result.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.worker", result);
+            attributes.addFlashAttribute("worker", worker);
+            return "redirect:/addWorker";
+        }else {
+            if( action.equals("save") ){
 
-            Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
-            Hall hall = testService.findHallById(workplace.getHall().getId());
-            worker.setWorkplace(workplace);
-            workplace.getWorkers().add(worker);
+                Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
+                Hall hall = testService.findHallById(workplace.getHall().getId());
+                worker.setWorkplace(workplace);
+                workplace.getWorkers().add(worker);
 
-            testService.updateHall(hall);
-            return "redirect:/";
-        }
-        // cancel
-        else {
-            return "redirect:/";
+                testService.updateHall(hall);
+                return "redirect:/";
+            }
+            // cancel
+            else {
+                return "redirect:/";
+            }
         }
     }
 

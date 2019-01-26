@@ -12,8 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -27,39 +29,47 @@ public class DocumentController {
 
     @GetMapping("/addDocument")
     public String showForm(Model model){
-        model.addAttribute("document", new Document());
+
+        if(!model.containsAttribute("document")) model.addAttribute("document", new Document());
+
         List<Workplace> workplaces = testService.findAllWorkplaces();
         model.addAttribute("workplaces", workplaces);
         List<Worker> workers = testService.findAllWorkers();
         model.addAttribute("workers", workers);
+
         return "addDocumentForm";
     }
 
     @PostMapping(value="/addDocument", consumes={"multipart/form-data"})
-    public String processForm(@ModelAttribute("document") Document document, @RequestParam String action, @Valid @RequestParam("file")
-            MultipartFile file){
-        //TODO validace
+    public String processForm(@ModelAttribute("document") @Valid Document document, BindingResult result,
+                              @RequestParam String action, @Valid @RequestParam("file")
+                                MultipartFile file, RedirectAttributes attributes){
 
         if( action.equals("save") ){
 
-            if(file.getContentType() != null && file.getContentType().equalsIgnoreCase("application/pdf")){
-                document.setFilePath(file.getOriginalFilename());
-                try {
-                    document.setFileData(file.getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if(result.hasErrors()) {
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.document", result);
+                attributes.addFlashAttribute("document", document);
+                return "redirect:/addDocument";
+            }else{
+                if(file.getContentType() != null && file.getContentType().equalsIgnoreCase("application/pdf")){
+                    document.setFilePath(file.getOriginalFilename());
+                    try {
+                        document.setFileData(file.getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                Workplace workplace = testService.findWorkplaceById(document.getWorkplace().getId());
+                Hall hall = testService.findHallById(workplace.getHall().getId());
+                document.setWorkplace(workplace);
+                workplace.getDocuments().add(document);
+
+                testService.updateHall(hall);
+                return "redirect:/";
             }
-
-            Workplace workplace = testService.findWorkplaceById(document.getWorkplace().getId());
-            Hall hall = testService.findHallById(workplace.getHall().getId());
-            document.setWorkplace(workplace);
-            workplace.getDocuments().add(document);
-
-            testService.updateHall(hall);
-            return "redirect:/";
         }
-        // cancel
         else {
             return "redirect:/";
         }
