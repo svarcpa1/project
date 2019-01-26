@@ -55,10 +55,27 @@
                 </div>
 
                 <!-- Textarea -->
+<%--
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textareaDco">Pracovní pozice zaměstnance:</label>
                     <div class="col-md-4">
-                        <form:textarea path="position" class="form-control" id="textareaDco" name="textareaDco"/>
+                        <form:textarea path="role" class="form-control" id="textareaDco" name="textareaDco"/>
+                    </div>
+                </div>
+
+
+--%>
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasicRole">Role:</label>
+                    <div class="col-md-4">
+                        <form:select path="role.id" id="selectbasicRole" name="selectbasicRole"
+                                     class="form-control" required="">
+                            <form:option value="0" label="Zvolte roly" />
+                            <form:options items="${roles}" itemLabel="name" itemValue="id" />
+                        </form:select>
+                        <form:errors path="role" cssStyle="color: salmon; font-style: italic;"/>
+
                     </div>
                 </div>
 

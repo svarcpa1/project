@@ -1,9 +1,6 @@
 package cz.uhk.ppro.project.services;
 
-import cz.uhk.ppro.project.model.Document;
-import cz.uhk.ppro.project.model.Hall;
-import cz.uhk.ppro.project.model.Worker;
-import cz.uhk.ppro.project.model.Workplace;
+import cz.uhk.ppro.project.model.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -48,6 +45,10 @@ public class TestService {
 
     public List<Worker> findAllWorkers() {
         return em.createQuery("SELECT w FROM Worker w", Worker.class).getResultList();
+    }
+
+    public List<Role> findAllRoles() {
+        return em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
     }
 
     public void updateHall(Hall hall) {

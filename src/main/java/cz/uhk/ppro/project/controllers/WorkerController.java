@@ -1,9 +1,6 @@
 package cz.uhk.ppro.project.controllers;
 
-import cz.uhk.ppro.project.model.Document;
-import cz.uhk.ppro.project.model.Hall;
-import cz.uhk.ppro.project.model.Worker;
-import cz.uhk.ppro.project.model.Workplace;
+import cz.uhk.ppro.project.model.*;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +25,8 @@ public class WorkerController {
 
         List<Workplace> workplaces = testService.findAllWorkplaces();
         model.addAttribute("workplaces", workplaces);
+        List<Role> roles = testService.findAllRoles();
+        model.addAttribute("roles", roles);
 
         return "addWorkerForm";
     }
@@ -36,13 +35,13 @@ public class WorkerController {
     public String processForm(@ModelAttribute("worker") @Valid Worker worker, BindingResult result,
                               @RequestParam String action, RedirectAttributes attributes){
 
-        if (result.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.worker", result);
-            attributes.addFlashAttribute("worker", worker);
-            return "redirect:/addWorker";
-        }else {
-            if( action.equals("save") ){
+        if( action.equals("save") ) {
 
+            if (result.hasErrors()) {
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.worker", result);
+                attributes.addFlashAttribute("worker", worker);
+                return "redirect:/addWorker";
+            } else {
                 Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
                 Hall hall = testService.findHallById(workplace.getHall().getId());
                 worker.setWorkplace(workplace);
@@ -51,10 +50,8 @@ public class WorkerController {
                 testService.updateHall(hall);
                 return "redirect:/";
             }
-            // cancel
-            else {
-                return "redirect:/";
-            }
+        }else {
+            return "redirect:/";
         }
     }
 

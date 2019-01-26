@@ -43,19 +43,17 @@ public class HallController {
     public String processForm(@ModelAttribute("hall") @Valid Hall hall, BindingResult result,
                               @RequestParam String action, RedirectAttributes attributes){
 
-        if(result.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
-            attributes.addFlashAttribute("hall", hall);
-            return "redirect:/addHall";
-        }else {
-            if( action.equals("save") ){
+        if( action.equals("save") ){
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
+                attributes.addFlashAttribute("hall", hall);
+                return "redirect:/addHall";
+            }else {
                 testService.saveEntity(hall);
                 return "redirect:/";
             }
-            // cancel
-            else {
-                return "redirect:/";
-            }
+        } else {
+            return "redirect:/";
         }
     }
 
@@ -64,7 +62,6 @@ public class HallController {
 
         testService.deleteHallById(id);
         return "redirect:/";
-
     }
 
     @GetMapping("/")
@@ -103,5 +100,4 @@ public class HallController {
 
         return l;
     }
-
 }

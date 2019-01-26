@@ -1,6 +1,7 @@
 package cz.uhk.ppro.project.controllers;
 
 import cz.uhk.ppro.project.model.Hall;
+import cz.uhk.ppro.project.model.Role;
 import cz.uhk.ppro.project.model.Workplace;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,13 @@ public class WorkplaceController {
     public String processForm(@ModelAttribute("workplace") @Valid Workplace workplace, BindingResult result,
                               @RequestParam String action, RedirectAttributes attributes){
 
-        if (result.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.workplace", result);
-            attributes.addFlashAttribute("workplace", workplace);
-            return "redirect:/addWorkplace";
+        if( action.equals("save") ){
+            if (result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.workplace", result);
+                attributes.addFlashAttribute("workplace", workplace);
+                return "redirect:/addWorkplace";
 
-        }else {
-            if( action.equals("save") ){
+            }else {
                 Hall hall = testService.findHallById(workplace.getHall().getId());
                 workplace.setHall(hall);
                 hall.getWorkplaces().add(workplace);
@@ -48,10 +49,8 @@ public class WorkplaceController {
                 testService.updateHall(hall);
                 return "redirect:/";
             }
-            // cancel
-            else {
-                return "redirect:/";
-            }
+        } else{
+            return "redirect:/";
         }
     }
 
