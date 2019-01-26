@@ -29,7 +29,7 @@ public class Document {
     @ManyToOne
     private Workplace workplace;
 
-    @WorkerConstraint
+    //@WorkerConstraint
     @ManyToOne
     private Worker workerCreated;
 

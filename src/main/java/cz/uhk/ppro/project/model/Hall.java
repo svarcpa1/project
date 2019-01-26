@@ -1,8 +1,5 @@
 package cz.uhk.ppro.project.model;
 
-import cz.uhk.ppro.project.validation.WorkerConstraint;
-import cz.uhk.ppro.project.validation.WorkplaceConstraint;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;

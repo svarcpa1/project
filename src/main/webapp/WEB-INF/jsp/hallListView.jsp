@@ -3,18 +3,16 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
     <title>Firma - seznam hal</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
+    <link href="../css/pricing.css" rel="stylesheet">
 </head>
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -25,7 +23,7 @@
         <a class="p-2 text-dark" href="addDocument">Přidat dokumentaci</a>
         <a class="p-2 text-dark" href="addWorker">Přidat zaměstnance</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
+    <a class="btn btn-outline-primary" href="login">Přihlásit se</a>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

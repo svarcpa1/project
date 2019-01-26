@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <link href="../../../java/cz/uhk/ppro/project/css/pricing.css" rel="stylesheet">
+    <link href="../css/pricing.css" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">

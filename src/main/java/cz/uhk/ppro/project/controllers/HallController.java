@@ -1,9 +1,6 @@
 package cz.uhk.ppro.project.controllers;
 
-import cz.uhk.ppro.project.model.Document;
-import cz.uhk.ppro.project.model.Hall;
-import cz.uhk.ppro.project.model.Worker;
-import cz.uhk.ppro.project.model.Workplace;
+import cz.uhk.ppro.project.model.*;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -87,15 +85,28 @@ public class HallController {
         wp2.setDescription("POpois pracoviště 2 sadasd asdhas asdhgasjd asdgasjdg");
         Document doc1 = new Document("dokument1", "xxx");
         Document doc2 = new Document("dokument2", "xxx");
-        Worker wrk1 = new Worker("Pavel", "ŠVARC" , "BOSS");
-        Worker wrk2 = new Worker("Ota", "Černý" , "Otrok");
+
+        Role rol1 = new Role("Admin");
+        Role rol2 = new Role("Master");
+
+        Worker wrk1 = new Worker("Pavel", "ŠVARC" , rol1);
+        Worker wrk2 = new Worker("Ota", "Černý" , rol2);
+
+        doc1.setDateCreated( new GregorianCalendar(2019, 1, 26).getTime());
+        doc1.setDateExpired( new GregorianCalendar(2019, 7, 1).getTime());
+        doc2.setDateCreated( new GregorianCalendar(2019, 1, 26).getTime());
+        doc2.setDateExpired( new GregorianCalendar(2019, 7, 1).getTime());
+
+        rol1.getWorker().add(wrk1);
+        rol2.getWorker().add(wrk2);
 
         h.getWorkplaces().add(wp1);
         h.getWorkplaces().add(wp2);
         wp1.setHall(h);
         wp2.setHall(h);
-        wp1.getDocuments().add(doc1);
-        wp2.getDocuments().add(doc2);
+
+        doc1.setWorkerCreated(wrk1);
+        doc2.setWorkerCreated(wrk2);
         doc1.setWorkplace(wp1);
         doc2.setWorkplace(wp2);
         wp1.getWorkers().add(wrk1);
@@ -104,10 +115,15 @@ public class HallController {
         wrk2.setWorkplace(wp2);
         wrk1.getDocumentsCreated().add(doc1);
         wrk2.getDocumentsCreated().add(doc2);
-        doc1.setWorkerCreated(wrk1);
-        doc2.setWorkerCreated(wrk2);
+
+        wp1.getDocuments().add(doc1);
+        wp2.getDocuments().add(doc2);
         List<Hall> l = new ArrayList<>();
         l.add(h);
+
+/*        testService.saveEntity(rol1);
+        testService.saveEntity(rol2);*/
+
         return l;
     }
 
