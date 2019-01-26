@@ -11,7 +11,8 @@
     <title>Firma - detail haly - ${hala.name}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="../css/pricing.css" rel="stylesheet">
@@ -60,8 +61,13 @@
                         <li>${workplace.description}</li>
 
                     </ul>
-                    <a href="${workplace.hall.id}/workplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště</button></a>
-                    <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button></a>
+                    <a href="${workplace.hall.id}/workplace/${workplace.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště
+                        </button>
+                    </a>
+                    <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button>
+                    </a>
                 </div>
             </div>
         </c:forEach>
@@ -69,43 +75,12 @@
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
-
             <div class="col-6 col-md">
-                <h5>Features</h5>
+                <h5>Pracoviště:</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
+                    <c:forEach items="${hala.workplaces}" var="workplace">
+                        <li><a class="text-muted" href="#">${workplace.name}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

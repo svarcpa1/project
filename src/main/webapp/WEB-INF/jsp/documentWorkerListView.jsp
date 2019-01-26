@@ -11,7 +11,8 @@
     <title>Firma - detail pracoviště - ${workplace.name}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="../css/pricing.css" rel="stylesheet">
@@ -51,7 +52,7 @@
 
     <div class="card-deck mb-3 text-center">
         <c:forEach items="${workplace.workers}" var="worker">
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-2 shadow-sm">
                 <div class="card-header bg-warning text-white">
                     <h4 class="my-0 font-weight-normal">${worker.firstName} ${worker.surName} (${worker.id})</h4>
                 </div>
@@ -60,8 +61,12 @@
                         <li>${worker.role.name}</li>
 
                     </ul>
-                    <a style="display: none;" href="/worker/${worker.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
-                    <a href="/deleteWorker/${worker.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
+                    <a style="display: none;" href="/worker/${worker.id}"><button
+                            type="button"
+                            class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
+                    <a href="/deleteWorker/${worker.id}"><button
+                            type="button"
+                            class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
                 </div>
             </div>
         </c:forEach>
@@ -69,7 +74,7 @@
 
     <div class="card-deck mb-3 text-center">
         <c:forEach items="${workplace.documents}" var="document">
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-1 shadow-sm">
                 <div class="card-header bg-danger text-white">
                     <h4 class="my-0 font-weight-normal">${document.name} (${document.id})</h4>
                 </div>
@@ -79,8 +84,12 @@
                         <li>Datum platnosti od: ${document.dateCreated}</li>
                         <li>Datum platnosti do: ${document.dateExpired}</li>
                     </ul>
-                    <a href="/loadDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
-                    <a href="/deleteDocument/${document.id}"><button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
+                    <a href="/loadDocument/${document.id}"><button
+                            type="button"
+                            class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
+                    <a href="/deleteDocument/${document.id}"><button
+                            type="button"
+                            class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
                 </div>
             </div>
         </c:forEach>
@@ -90,41 +99,19 @@
         <div class="row">
 
             <div class="col-6 col-md">
-                <h5>Features</h5>
+                <h5>Pracovníci:</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
+                    <c:forEach items="${workplace.workers}" var="workers">
+                        <li><a class="text-muted" href="#">${workers.firstName} ${workers.surName}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="col-6 col-md">
-                <h5>Resources</h5>
+                <h5>Dokumentace:</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
+                    <c:forEach items="${workplace.documents}" var="documents">
+                        <li><a class="text-muted" href="#">${documents.name}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

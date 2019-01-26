@@ -52,7 +52,8 @@ public class DocumentController {
                 attributes.addFlashAttribute("document", document);
                 return "redirect:/addDocument";
             }else{
-                if(file.getContentType() != null && file.getContentType().equalsIgnoreCase("application/pdf")){
+                if(file.getContentType() != null && file.getContentType()
+                        .equalsIgnoreCase("application/pdf")){
                     document.setFilePath(file.getOriginalFilename());
                     try {
                         document.setFileData(file.getBytes());

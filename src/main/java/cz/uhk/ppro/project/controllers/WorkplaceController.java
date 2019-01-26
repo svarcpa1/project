@@ -2,6 +2,7 @@ package cz.uhk.ppro.project.controllers;
 
 import cz.uhk.ppro.project.model.Hall;
 import cz.uhk.ppro.project.model.Role;
+import cz.uhk.ppro.project.model.Worker;
 import cz.uhk.ppro.project.model.Workplace;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,10 @@ public class WorkplaceController {
         }
         else {
             model.addAttribute("hala", hall);
+
+            List<Worker> workers = testService.findAllWorkers();
+            model.addAttribute("workers", workers);
+
             return "workplaceListView";
         }
     }
