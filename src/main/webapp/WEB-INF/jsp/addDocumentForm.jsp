@@ -36,12 +36,8 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./">Firma</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
-            <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-            <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
-            <a class="p-2 text-dark" href="../addWorker">Přidat zaměstnance</a>
+            <%@include file="_menu.jsp" %>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
     </div>
     <div class="container">
         <form:form modelAttribute="document" cssClass="form-horizontal" enctype="multipart/form-data" method="post">
