@@ -12,10 +12,8 @@
     <title>Firma - Přidat halu</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="../css/pricing.css" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -32,10 +30,8 @@
         <form:form modelAttribute="hall" cssClass="form-horizontal">
             <fieldset>
 
-                <!-- Form Name -->
                 <legend>Přídání nové haly</legend>
 
-                <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textInputName">Název haly:</label>
                     <div class="col-md-4">
@@ -45,7 +41,6 @@
                     </div>
                 </div>
 
-                <!-- Textarea -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textareaDescription">Popis haly</label>
                     <div class="col-md-4">
@@ -54,7 +49,6 @@
                     </div>
                 </div>
 
-                <!-- Button -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">

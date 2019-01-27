@@ -81,8 +81,8 @@ public class HallController {
         Workplace wp2 = new Workplace("pracoviste2");
         wp2.setDescription("POpois pracoviště 2 sadasd asdhas asdhgasjd asdgasjdg");
 
-        Role rol1 = new Role("Admin");
-        Role rol2 = new Role("Master");
+        Role rol1 = new Role("ROLE_Admin");
+        Role rol2 = new Role("ROLE_Master");
         Worker wrk1 = new Worker("Pavel", "ŠVARC" , rol1);
         Worker wrk2 = new Worker("Ota", "Černý" , rol2);
 

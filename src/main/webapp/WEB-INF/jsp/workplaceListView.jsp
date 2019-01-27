@@ -46,6 +46,9 @@
                     <li>${hala.description}</li>
 
                 </ul>
+                <a href="/hall/edit/${hala.id}">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis haly</button>
+                </a>
             </div>
         </div>
     </div>

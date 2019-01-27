@@ -44,7 +44,11 @@ public class WorkerController {
             } else {
                 Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
                 Hall hall = testService.findHallById(workplace.getHall().getId());
+                Role role = testService.findRoleById(worker.getRole().getId());
+                worker.setRole(role);
                 worker.setWorkplace(workplace);
+                worker.setLogin(worker.getFirstName() + "." + worker.getSurName());
+                worker.setPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
                 workplace.getWorkers().add(worker);
 
                 testService.updateHall(hall);

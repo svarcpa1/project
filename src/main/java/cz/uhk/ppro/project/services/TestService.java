@@ -4,7 +4,9 @@ import cz.uhk.ppro.project.model.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -17,6 +19,10 @@ public class TestService {
 
     public Hall findHallById(long id) {
         return em.find(Hall.class,id);
+    }
+
+    public Role findRoleById(long id) {
+        return em.find(Role.class,id);
     }
 
     public Worker findWorkerById(long id) {
@@ -67,4 +73,27 @@ public class TestService {
     public byte[] loadDocumentFileById(long documentId){
         return em.find(Document.class,documentId).getFileData();
     }
+
+    public Worker findUserAccount(String userName) {
+        try {
+            String sql = "Select e from " + Worker.class.getName() + " e " //
+                    + " Where e.login = :userName ";
+
+            Query query = em.createQuery(sql, Worker.class);
+            query.setParameter("userName", userName);
+            return (Worker) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<String> getRoleNames(Long userId) {
+        String sql = "Select w.role.name from " + Worker.class.getName() + " w " //
+                + " where w.id = :userId ";
+
+        Query query = this.em.createQuery(sql, String.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
 }

@@ -99,4 +99,36 @@ public class WorkplaceController {
         }
     }
 
+    @GetMapping("/hall/edit/{id}")
+    public String editHallView(Model model, @PathVariable("id") long id){
+
+        model.addAttribute("hall", testService.findHallById(id));
+        //model.addAttribute("workplaces", testService.findHallById(id).getWorkplaces());
+        return "addHallForm";
+    }
+
+    @PostMapping("/hall/edit/{id}")
+    public String editHall(@ModelAttribute("hall") @Valid Hall hall, BindingResult result,
+                           @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id){
+
+        if( action.equals("save") ){
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
+                attributes.addFlashAttribute("hall", hall);
+                //attributes.addFlashAttribute("workplaces",workplace);
+                return "addHallForm";
+            }else {
+                Hall edittedHall = testService.findHallById(id);
+                edittedHall.setName(hall.getName());
+                edittedHall.setDescription(hall.getDescription());
+                testService.updateHall(edittedHall);
+                //System.out.println(hall.getWorkplaces().get(0).getName());
+                //testService.deleteHallById(id);
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
+
 }

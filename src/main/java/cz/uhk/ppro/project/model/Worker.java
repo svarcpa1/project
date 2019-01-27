@@ -4,6 +4,7 @@ import cz.uhk.ppro.project.validation.WorkplaceConstraint;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class Worker {
         this.firstName = firstName;
         this.surName = surName;
         this.role = role;
+        login = firstName + "." + surName;
+        password = "$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu";
     }
 
     public long getId() {

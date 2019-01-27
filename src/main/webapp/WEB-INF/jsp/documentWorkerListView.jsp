@@ -46,6 +46,9 @@
                     <li>${workplace.description}</li>
 
                 </ul>
+                <a href="/hall/edit/${workplace.id}">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis pracoviště</button>
+                </a>
             </div>
         </div>
     </div>
