@@ -42,6 +42,7 @@ public class WorkerController {
                 attributes.addFlashAttribute("worker", worker);
                 return "redirect:/addWorker";
             } else {
+
                 Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
                 Hall hall = testService.findHallById(workplace.getHall().getId());
                 Role role = testService.findRoleById(worker.getRole().getId());
@@ -73,7 +74,44 @@ public class WorkerController {
 
         testService.updateHall(hall);
         return "redirect:/";
-
     }
 
+    @GetMapping("/worker/edit/{id}")
+    public String editWorkerView(Model model, @PathVariable("id") long id){
+
+        model.addAttribute("worker", testService.findWorkerById(id));
+
+        List<Workplace> workplaces = testService.findAllWorkplaces();
+        model.addAttribute("workplaces", workplaces);
+        List<Role> roles = testService.findAllRoles();
+        model.addAttribute("roles", roles);
+
+        return "addWorkerForm";
+    }
+
+    @PostMapping("/worker/edit/{id}")
+    public String editWorker(@ModelAttribute("worker") @Valid Worker worker, BindingResult result,
+                             @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id){
+
+        if( action.equals("save") ){
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.worker", result);
+                attributes.addFlashAttribute("worker", worker);
+                return "addWorkerForm";
+            }else {
+
+                Worker edittedWorker = testService.findWorkerById(id);
+
+                edittedWorker.setFirstName(worker.getFirstName());
+                edittedWorker.setSurName(worker.getSurName());
+                edittedWorker.setRole(testService.findRoleById(worker.getRole().getId()));
+                edittedWorker.setWorkplace(worker.getWorkplace());
+
+                testService.updateWorker(edittedWorker);
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
 }

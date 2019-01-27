@@ -11,10 +11,8 @@
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Firma - Přidat zaměstnance</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <link href="../css/pricing.css" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -31,10 +29,8 @@
         <form:form modelAttribute="worker" cssClass="form-horizontal">
             <fieldset>
 
-                <!-- Form Name -->
                 <legend>Přidání zaměstnance</legend>
 
-                <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputNameDoc">Jméno zaměstnance:</label>
                     <div class="col-md-4">
@@ -44,7 +40,6 @@
                     </div>
                 </div>
 
-                <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinputSurname">Příjmení zaměstnance:</label>
                     <div class="col-md-4">
@@ -54,7 +49,6 @@
                     </div>
                 </div>
 
-                <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasicRole">Role:</label>
                     <div class="col-md-4">
@@ -68,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasicWorkplace">Pracoviště:</label>
                     <div class="col-md-4">
@@ -81,7 +74,6 @@
                     </div>
                 </div>
 
-                <!-- Button -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="buttonAdd"></label>
                     <div class="col-md-4">

@@ -99,31 +99,35 @@ public class WorkplaceController {
         }
     }
 
-    @GetMapping("/hall/edit/{id}")
-    public String editHallView(Model model, @PathVariable("id") long id){
+    @GetMapping("/workplace/edit/{id}")
+    public String editWorkplaceView(Model model, @PathVariable("id") long id){
 
-        model.addAttribute("hall", testService.findHallById(id));
-        //model.addAttribute("workplaces", testService.findHallById(id).getWorkplaces());
-        return "addHallForm";
+        model.addAttribute("workplace", testService.findWorkplaceById(id));
+
+        List<Hall> haly = testService.findAllHalls();
+        model.addAttribute("haly", haly);
+
+        return "addWorkplaceForm";
     }
 
-    @PostMapping("/hall/edit/{id}")
-    public String editHall(@ModelAttribute("hall") @Valid Hall hall, BindingResult result,
-                           @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id){
+    @PostMapping("/workplace/edit/{id}")
+    public String editWorkplace(@ModelAttribute("workplace") @Valid Workplace workplace, BindingResult result,
+                                @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id){
 
         if( action.equals("save") ){
             if(result.hasErrors()){
-                attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
-                attributes.addFlashAttribute("hall", hall);
-                //attributes.addFlashAttribute("workplaces",workplace);
-                return "addHallForm";
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.workplace", result);
+                attributes.addFlashAttribute("workplace", workplace);
+                return "addWorkplaceForm";
             }else {
-                Hall edittedHall = testService.findHallById(id);
-                edittedHall.setName(hall.getName());
-                edittedHall.setDescription(hall.getDescription());
-                testService.updateHall(edittedHall);
-                //System.out.println(hall.getWorkplaces().get(0).getName());
-                //testService.deleteHallById(id);
+
+                Workplace edittedWorkplace = testService.findWorkplaceById(id);
+
+                edittedWorkplace.setName(workplace.getName());
+                edittedWorkplace.setHall(workplace.getHall());
+                edittedWorkplace.setDescription(workplace.getDescription());
+
+                testService.updateWorkplace(edittedWorkplace);
                 return "redirect:/";
             }
         } else {

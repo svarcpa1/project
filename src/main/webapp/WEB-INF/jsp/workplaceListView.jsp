@@ -42,13 +42,15 @@
                 <h4 class="my-0 font-weight-normal">${hala.name} (${hala.id})</h4>
             </div>
             <div class="card-body">
+
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>${hala.description}</li>
-
                 </ul>
+
                 <a href="/hall/edit/${hala.id}">
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis haly</button>
                 </a>
+
             </div>
         </div>
     </div>

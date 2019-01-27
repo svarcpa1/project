@@ -46,9 +46,12 @@
                     <li>${workplace.description}</li>
 
                 </ul>
-                <a href="/hall/edit/${workplace.id}">
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis pracoviště</button>
+
+                <a href="/workplace/edit/${workplace.id}">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis pracoviště
+                    </button>
                 </a>
+
             </div>
         </div>
     </div>
@@ -59,17 +62,27 @@
                 <div class="card-header bg-warning text-white">
                     <h4 class="my-0 font-weight-normal">${worker.firstName} ${worker.surName} (${worker.id})</h4>
                 </div>
+
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>${worker.role.name}</li>
-
                     </ul>
+
                     <a style="display: none;" href="/worker/${worker.id}"><button
                             type="button"
-                            class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button></a>
+                            class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button>
+                    </a>
+
+                    <a href="/worker/edit/${worker.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat zaměstnance
+                        </button>
+                    </a>
+
                     <a href="/deleteWorker/${worker.id}"><button
                             type="button"
-                            class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button></a>
+                            class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button>
+                    </a>
+
                 </div>
             </div>
         </c:forEach>
@@ -81,19 +94,32 @@
                 <div class="card-header bg-danger text-white">
                     <h4 class="my-0 font-weight-normal">${document.name} (${document.id})</h4>
                 </div>
+
                 <div class="card-body">
+
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Vytvořil: ${document.workerCreated.firstName} ${document.workerCreated.surName}</li>
                         <li>Datum platnosti od: ${document.dateCreated}</li>
                         <li>Datum platnosti do: ${document.dateExpired}</li>
                     </ul>
+
                     <a href="/loadDocument/${document.id}"><button
                             type="button"
-                            class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button></a>
+                            class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button>
+                    </a>
+
+                    <a href="/document/edit/${document.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat dokumentaci
+                        </button>
+                    </a>
+
                     <a href="/deleteDocument/${document.id}"><button
                             type="button"
-                            class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button></a>
+                            class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button>
+                    </a>
+
                 </div>
+
             </div>
         </c:forEach>
     </div>

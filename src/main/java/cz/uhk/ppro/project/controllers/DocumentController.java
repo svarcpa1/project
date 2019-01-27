@@ -1,9 +1,6 @@
 package cz.uhk.ppro.project.controllers;
 
-import cz.uhk.ppro.project.model.Document;
-import cz.uhk.ppro.project.model.Hall;
-import cz.uhk.ppro.project.model.Worker;
-import cz.uhk.ppro.project.model.Workplace;
+import cz.uhk.ppro.project.model.*;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.Id;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -88,10 +86,8 @@ public class DocumentController {
         }
         workplace.removeDocument(document);
 
-
         testService.updateHall(hall);
         return "redirect:/";
-
     }
 
     @GetMapping("/loadDocument/{id}")
@@ -108,4 +104,57 @@ public class DocumentController {
         return new ResponseEntity<>(documentData, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/document/edit/{id}")
+    public String editDocView(Model model, @PathVariable("id") long id){
+
+        model.addAttribute("document", testService.findDocumentById(id));
+
+        List<Workplace> workplaces = testService.findAllWorkplaces();
+        model.addAttribute("workplaces", workplaces);
+        List<Worker> workers = testService.findAllWorkers();
+        model.addAttribute("workers", workers);
+
+        return "addDocumentForm";
+    }
+
+    @PostMapping("/document/edit/{id}")
+    public String editDoc(@ModelAttribute("document") @Valid Document document, BindingResult result,
+                           @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id,
+                          @Valid @RequestParam("file") MultipartFile file){
+
+        if( action.equals("save") ){
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.document", result);
+                attributes.addFlashAttribute("document", document);
+                return "addDocumentForm";
+            }else {
+
+                Document edittedDoc = testService.findDocumentById(id);
+
+                if(file.getContentType() != null && file.getContentType()
+                        .equalsIgnoreCase("application/pdf")){
+                    document.setFilePath(file.getOriginalFilename());
+                    try {
+                        document.setFileData(file.getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                edittedDoc.setName(document.getName());
+                edittedDoc.setDescription(document.getDescription());
+                edittedDoc.setWorkerCreated(document.getWorkerCreated());
+                edittedDoc.setWorkplace(document.getWorkplace());
+                edittedDoc.setDateCreated(document.getDateCreated());
+                edittedDoc.setDateExpired(document.getDateExpired());
+                edittedDoc.setFileData(document.getFileData());
+                edittedDoc.setFilePath(document.getFilePath());
+
+                testService.updateDoc(edittedDoc);
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
 }

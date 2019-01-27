@@ -61,8 +61,16 @@ public class TestService {
         em.merge(hall);
     }
 
+    public void updateDoc(Document doc) {
+        em.merge(doc);
+    }
+
     public void updateWorkplace(Workplace wp) {
         em.merge(wp);
+    }
+
+    public void updateWorker(Worker worker) {
+        em.merge(worker);
     }
 
     public void deleteHallById(long id) {

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -69,6 +68,39 @@ public class HallController {
         List<Hall> haly = testService.findAllHalls();
         model.addAttribute("haly", haly);
         return "hallListView";
+    }
+
+    @GetMapping("/hall/edit/{id}")
+    public String editHallView(Model model, @PathVariable("id") long id){
+
+        model.addAttribute("hall", testService.findHallById(id));
+        return "addHallForm";
+    }
+
+    @PostMapping("/hall/edit/{id}")
+    public String editHall(@ModelAttribute("hall") @Valid Hall hall, BindingResult result,
+                           @RequestParam String action, RedirectAttributes attributes, @PathVariable("id") long id){
+
+        if( action.equals("save") ){
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
+                attributes.addFlashAttribute("hall", hall);
+                //attributes.addFlashAttribute("workplaces",workplace);
+                return "addHallForm";
+            }else {
+
+
+                Hall edittedHall = testService.findHallById(id);
+                edittedHall.setName(hall.getName());
+                edittedHall.setDescription(hall.getDescription());
+                testService.updateHall(edittedHall);
+                //System.out.println(hall.getWorkplaces().get(0).getName());
+                //testService.deleteHallById(id);
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
     }
 
     private List<Hall> fillList(){
