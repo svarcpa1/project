@@ -3,6 +3,7 @@ package cz.uhk.ppro.project.controllers;
 import cz.uhk.ppro.project.model.*;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +28,10 @@ public class WorkerController {
         model.addAttribute("workplaces", workplaces);
         List<Role> roles = testService.findAllRoles();
         model.addAttribute("roles", roles);
-
+        model.addAttribute("edit",false);
         return "addWorkerForm";
     }
-
+    private int counter = 0;
     @PostMapping("/addWorker")
     public String processForm(@ModelAttribute("worker") @Valid Worker worker, BindingResult result,
                               @RequestParam String action, RedirectAttributes attributes){
@@ -42,14 +43,16 @@ public class WorkerController {
                 attributes.addFlashAttribute("worker", worker);
                 return "redirect:/addWorker";
             } else {
-
+                counter+=1;
                 Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
                 Hall hall = testService.findHallById(workplace.getHall().getId());
                 Role role = testService.findRoleById(worker.getRole().getId());
                 worker.setRole(role);
                 worker.setWorkplace(workplace);
-                worker.setLogin(worker.getFirstName() + "." + worker.getSurName());
-                worker.setPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
+                worker.setLogin(worker.getFirstName() + "." + worker.getSurName()+counter);
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                worker.setPassword( passwordEncoder.encode(worker.getPassword()));
+
                 workplace.getWorkers().add(worker);
 
                 attributes.addFlashAttribute("successMsg", "Pracovník byl úspěšně přidán.");
@@ -90,7 +93,7 @@ public class WorkerController {
         model.addAttribute("workplaces", workplaces);
         List<Role> roles = testService.findAllRoles();
         model.addAttribute("roles", roles);
-
+        model.addAttribute("edit",true);
         return "addWorkerForm";
     }
 

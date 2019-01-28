@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "login"))
 public class Worker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +33,13 @@ public class Worker {
     private Role role;
 
     public Worker() {
-        id=0;
+
     }
     public Worker(String firstName, String surName, Role role) {
         this.firstName = firstName;
         this.surName = surName;
         this.role = role;
         login = firstName + "." + surName;
-        password = "$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu";
     }
 
     public long getId() {

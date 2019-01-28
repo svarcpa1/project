@@ -16,10 +16,7 @@
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/">Firma</a></h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <%@include file="_menu.jsp" %>
-        </nav>
+       <%@include file="_menu.jsp" %>
     </div>
     <div class="container">
         <form:form modelAttribute="worker" cssClass="form-horizontal">
@@ -44,6 +41,20 @@
                         <form:errors path="surName" cssStyle="color: salmon; font-style: italic;"/>
                     </div>
                 </div>
+
+                <c:if test="${edit==false}">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinputPassword">Heslo zaměstnance:</label>
+                    <div class="col-md-4">
+                        <form:input path="password" id="textinputPassword" name="textinputPassword" type="password"
+                                    placeholder="" class="form-control input-md" required=""/>
+                        <form:errors path="password" cssStyle="color: salmon; font-style: italic;"/>
+                        <!-- An element to toggle between password visibility -->
+                        <label><input style="margin-right: 5px;" type="checkbox" onclick="myFunction()">Show Password</label>
+                    </div>
+
+                </div>
+                </c:if>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasicRole">Role:</label>
@@ -81,5 +92,18 @@
             </fieldset>
         </form:form>
     </div>
+
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("textinputPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package cz.uhk.ppro.project.controllers;
 import cz.uhk.ppro.project.model.*;
 import cz.uhk.ppro.project.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,8 +27,7 @@ public class HallController {
             testService.saveEntity(hala);
         }
 
-        model.addAttribute("haly", haly);
-        return "hallListView";
+        return "redirect:/";
     }
 
     @GetMapping("/addHall")
@@ -107,6 +107,8 @@ public class HallController {
         }
     }
 
+    private boolean b = true;
+
     private List<Hall> fillList(){
         Hall h = new Hall("plechy");
         h.setDescription("Pppp lorem ipsum doc addao asdjasjdj Pppp lorem ipsum doc addao asdjasjdj asdoajsdoj " +
@@ -117,19 +119,25 @@ public class HallController {
         Workplace wp2 = new Workplace("pracoviste2");
         wp2.setDescription("POpois pracoviště 2 sadasd asdhas asdhgasjd asdgasjdg");
 
-        Role rol1 = new Role("ROLE_Admin");
-        Role rol2 = new Role("ROLE_Master");
-        Worker wrk1 = new Worker("Pavel", "ŠVARC" , rol1);
-        Worker wrk2 = new Worker("Ota", "Černý" , rol2);
-
         h.getWorkplaces().add(wp1);
         h.getWorkplaces().add(wp2);
         wp1.setHall(h);
         wp2.setHall(h);
-        wp1.getWorkers().add(wrk1);
-        wp2.getWorkers().add(wrk2);
-        wrk1.setWorkplace(wp1);
-        wrk2.setWorkplace(wp2);
+
+      if(b){
+          Role rol1 = new Role("ROLE_Admin");
+          Role rol2 = new Role("ROLE_Master");
+          Worker wrk1 = new Worker("Pavel", "ŠVARC" , rol1);
+          BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+          wrk1.setPassword( passwordEncoder.encode("123"));
+          Worker wrk2 = new Worker("Ota", "Černý" , rol2);
+          wrk2.setPassword( passwordEncoder.encode("123"));
+          wp1.getWorkers().add(wrk1);
+          wp2.getWorkers().add(wrk2);
+          wrk1.setWorkplace(wp1);
+          wrk2.setWorkplace(wp2);
+          b=false;
+      }
 
         List<Hall> l = new ArrayList<>();
         l.add(h);

@@ -20,10 +20,7 @@
 </head>
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="../../../">Firma</a></h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-        <%@include file="_menu.jsp" %>
-    </nav>
+    <%@include file="_menu.jsp" %>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -98,11 +95,12 @@
                         <li>Datum platnosti od: ${document.dateCreated}</li>
                         <li>Datum platnosti do: ${document.dateExpired}</li>
                     </ul>
-
-                    <a href="/loadDocument/${document.id}"><button
-                            type="button"
-                            class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button>
-                    </a>
+                    <c:if test="${document.fileData!=null}">
+                        <a href="/loadDocument/${document.id}"><button
+                                type="button"
+                                class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button>
+                        </a>
+                    </c:if>
 
                     <security:authorize access="hasAnyRole('ROLE_Admin', 'ROLE_Master')">
                         <a href="/document/edit/${document.id}">
