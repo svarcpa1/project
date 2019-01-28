@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -43,10 +44,12 @@
 
                 </ul>
 
-                <a href="/workplace/edit/${workplace.id}">
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis pracoviště
-                    </button>
-                </a>
+                <security:authorize access="hasRole('ROLE_Admin')">
+                    <a href="/workplace/edit/${workplace.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis pracoviště
+                        </button>
+                    </a>
+                </security:authorize>
 
             </div>
         </div>
@@ -64,20 +67,17 @@
                         <li>${worker.role.name}</li>
                     </ul>
 
-                    <a style="display: none;" href="/worker/${worker.id}"><button
-                            type="button"
-                            class="btn btn-lg btn-block btn-outline-primary">Detail zaměstance</button>
-                    </a>
+                    <security:authorize access="hasRole('ROLE_Admin')">
+                        <a href="/worker/edit/${worker.id}">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat zaměstnance
+                            </button>
+                        </a>
 
-                    <a href="/worker/edit/${worker.id}">
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat zaměstnance
-                        </button>
-                    </a>
-
-                    <a href="/deleteWorker/${worker.id}"><button
-                            type="button"
-                            class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button>
-                    </a>
+                        <a href="/deleteWorker/${worker.id}"><button
+                                type="button"
+                                class="btn btn-lg btn-block btn-outline-danger">Smazat zaměstnance</button>
+                        </a>
+                    </security:authorize>
 
                 </div>
             </div>
@@ -104,18 +104,21 @@
                             class="btn btn-lg btn-block btn-outline-primary">Detail dokumentace</button>
                     </a>
 
-                    <a href="/document/edit/${document.id}">
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat dokumentaci
-                        </button>
-                    </a>
+                    <security:authorize access="hasAnyRole('ROLE_Admin', 'ROLE_Master')">
+                        <a href="/document/edit/${document.id}">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat dokumentaci
+                            </button>
+                        </a>
+                    </security:authorize>
 
-                    <a href="/deleteDocument/${document.id}"><button
-                            type="button"
-                            class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button>
-                    </a>
+                    <security:authorize access="hasRole('ROLE_Admin')">
+                        <a href="/deleteDocument/${document.id}"><button
+                                type="button"
+                                class="btn btn-lg btn-block btn-outline-danger">Smazat dokumentaci</button>
+                        </a>
+                    </security:authorize>
 
                 </div>
-
             </div>
         </c:forEach>
     </div>

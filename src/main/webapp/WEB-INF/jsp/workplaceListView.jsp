@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -21,12 +22,8 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal"><a href="../">Firma</a></h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="../addHall">Přidat halu</a>
-        <a class="p-2 text-dark" href="../addWorkplace">Přidat pracoviště</a>
-        <a class="p-2 text-dark" href="../addDocument">Přidat dokumentaci</a>
-        <a class="p-2 text-dark" href="../addWorker">Přidat zaměstnance</a>
+        <%@include file="_menu.jsp" %>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Přihlásit se</a>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -47,9 +44,12 @@
                     <li>${hala.description}</li>
                 </ul>
 
-                <a href="/hall/edit/${hala.id}">
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Editovat popis haly</button>
-                </a>
+                <security:authorize access="hasRole('ROLE_Admin')">
+                    <a href="/hall/edit/${hala.id}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">
+                            Editovat popis haly</button>
+                    </a>
+                </security:authorize>
 
             </div>
         </div>
@@ -57,7 +57,7 @@
 
     <div class="card-deck mb-3 text-center">
         <c:forEach items="${hala.workplaces}" var="workplace">
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-2 shadow-sm">
                 <div class="card-header bg-success text-white">
                     <h4 class="my-0 font-weight-normal">${workplace.name} (${workplace.id})</h4>
                 </div>
@@ -70,9 +70,14 @@
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary">Detail pracoviště
                         </button>
                     </a>
-                    <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}">
-                        <button type="button" class="btn btn-lg btn-block btn-outline-danger">Smazat pracoviště</button>
-                    </a>
+
+                    <security:authorize access="hasRole('ROLE_Admin')">
+                        <a href="${workplace.hall.id}/deleteWorkplace/${workplace.id}">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-danger">
+                                Smazat pracoviště</button>
+                        </a>
+                    </security:authorize>
+
                 </div>
             </div>
         </c:forEach>

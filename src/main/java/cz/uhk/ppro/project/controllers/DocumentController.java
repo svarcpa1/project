@@ -60,6 +60,8 @@ public class DocumentController {
                     }
                 }
 
+                attributes.addFlashAttribute("successMsg", "Dokumentace byla úspěšně přidána.");
+
                 Workplace workplace = testService.findWorkplaceById(document.getWorkplace().getId());
                 Hall hall = testService.findHallById(workplace.getHall().getId());
                 document.setWorkplace(workplace);
@@ -75,7 +77,8 @@ public class DocumentController {
     }
 
     @RequestMapping("/deleteDocument/{id}")
-    public String deleteDocumentId(@ModelAttribute("document") Document document, @PathVariable("id") long id){
+    public String deleteDocumentId(@ModelAttribute("document") Document document, @PathVariable("id") long id,
+                                   RedirectAttributes attributes){
         document = testService.findDocumentById(id);
         Workplace workplace = testService.findWorkplaceById(document.getWorkplace().getId());
         Hall hall = testService.findHallById(workplace.getHall().getId());
@@ -85,6 +88,8 @@ public class DocumentController {
             worker.removeDocument(document);
         }
         workplace.removeDocument(document);
+
+        attributes.addFlashAttribute("successMsg", "Dokumentace byla úspěšně smazána.");
 
         testService.updateHall(hall);
         return "redirect:/";
@@ -128,6 +133,8 @@ public class DocumentController {
                 attributes.addFlashAttribute("document", document);
                 return "addDocumentForm";
             }else {
+
+                attributes.addFlashAttribute("successMsg", "Dokumentace byla úspěšně editována.");
 
                 Document edittedDoc = testService.findDocumentById(id);
 

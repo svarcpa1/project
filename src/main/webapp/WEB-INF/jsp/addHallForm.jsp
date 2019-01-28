@@ -22,6 +22,7 @@
             <%@include file="_menu.jsp" %>
         </nav>
     </div>
+
     <div class="container">
         <form:form modelAttribute="hall" cssClass="form-horizontal">
             <fieldset>

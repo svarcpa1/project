@@ -52,6 +52,8 @@ public class WorkerController {
                 worker.setPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
                 workplace.getWorkers().add(worker);
 
+                attributes.addFlashAttribute("successMsg", "Pracovník byl úspěšně přidán.");
+
                 testService.updateHall(hall);
                 return "redirect:/";
             }
@@ -61,7 +63,8 @@ public class WorkerController {
     }
 
     @RequestMapping("/deleteWorker/{id}")
-    public String deleteWorkerId(@ModelAttribute("worker") Worker worker, @PathVariable("id") long id){
+    public String deleteWorkerId(@ModelAttribute("worker") Worker worker,
+                                 @PathVariable("id") long id, RedirectAttributes attributes){
         worker = testService.findWorkerById(id);
         Workplace workplace = testService.findWorkplaceById(worker.getWorkplace().getId());
         Hall hall = testService.findHallById(workplace.getHall().getId());
@@ -71,6 +74,8 @@ public class WorkerController {
         for (Document document: documents) {
             document.setWorkerCreated(null);
         }
+
+        attributes.addFlashAttribute("successMsg", "Pracovník byl úspěšně smazán.");
 
         testService.updateHall(hall);
         return "redirect:/";
@@ -106,6 +111,8 @@ public class WorkerController {
                 edittedWorker.setSurName(worker.getSurName());
                 edittedWorker.setRole(testService.findRoleById(worker.getRole().getId()));
                 edittedWorker.setWorkplace(worker.getWorkplace());
+
+                attributes.addFlashAttribute("successMsg", "Pracovník byl úspěšně editován.");
 
                 testService.updateWorker(edittedWorker);
                 return "redirect:/";

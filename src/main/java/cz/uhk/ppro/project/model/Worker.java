@@ -1,10 +1,10 @@
 package cz.uhk.ppro.project.model;
 
+import cz.uhk.ppro.project.validation.RoleConstraint;
 import cz.uhk.ppro.project.validation.WorkplaceConstraint;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class Worker {
     private String firstName;
     @NotEmpty
     private String surName;
+
     @WorkplaceConstraint
     @ManyToOne
     private Workplace workplace;
@@ -26,6 +27,7 @@ public class Worker {
     private String password;
     private String login;
 
+    @RoleConstraint
     @ManyToOne(cascade=CascadeType.PERSIST)
     private Role role;
 

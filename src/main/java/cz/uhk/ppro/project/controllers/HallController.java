@@ -48,6 +48,8 @@ public class HallController {
                 attributes.addFlashAttribute("hall", hall);
                 return "redirect:/addHall";
             }else {
+
+                attributes.addFlashAttribute("successMsg", "Hala byla úspěšně přidána.");
                 testService.saveEntity(hall);
                 return "redirect:/";
             }
@@ -57,7 +59,10 @@ public class HallController {
     }
 
     @RequestMapping("/deleteHall/{id}")
-    public String deleteHallId(@ModelAttribute("hall") Hall hall, @PathVariable("id") long id){
+    public String deleteHallId(@ModelAttribute("hall") Hall hall, RedirectAttributes attributes,
+                               @PathVariable("id") long id){
+
+        attributes.addFlashAttribute("successMsg", "Hala byla úspěšně smazána.");
 
         testService.deleteHallById(id);
         return "redirect:/";
@@ -67,6 +72,7 @@ public class HallController {
     public String getAllHalls(Model model){
         List<Hall> haly = testService.findAllHalls();
         model.addAttribute("haly", haly);
+
         return "hallListView";
     }
 
@@ -85,17 +91,15 @@ public class HallController {
             if(result.hasErrors()){
                 attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
                 attributes.addFlashAttribute("hall", hall);
-                //attributes.addFlashAttribute("workplaces",workplace);
                 return "addHallForm";
             }else {
 
+                attributes.addFlashAttribute("successMsg", "Hala byla úspěšně editována.");
 
                 Hall edittedHall = testService.findHallById(id);
                 edittedHall.setName(hall.getName());
                 edittedHall.setDescription(hall.getDescription());
                 testService.updateHall(edittedHall);
-                //System.out.println(hall.getWorkplaces().get(0).getName());
-                //testService.deleteHallById(id);
                 return "redirect:/";
             }
         } else {

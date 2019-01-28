@@ -42,12 +42,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // The pages does not require login
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
 
-        // page requires login as one of the specified roles
-        // If no login, it will redirect to /login page.
-        http.authorizeRequests().antMatchers("/hall/*").access("hasAnyRole('ROLE_Master', 'ROLE_Admin')");
-
-        // For one role only.
+        //menu (creating) rights
         http.authorizeRequests().antMatchers("/addWorker").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/addHall").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/addWorkplace").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/addDocument")
+                .access("hasAnyRole('ROLE_Admin', 'ROLE_Master')");
+
+        //editing rights
+        http.authorizeRequests().antMatchers("/worker/edit/*").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/hall/edit/*").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/workplace/edit/*").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/document/edit/*")
+                .access("hasAnyRole('ROLE_Admin', 'ROLE_Master')");
+
+        //deleting rights
+        http.authorizeRequests().antMatchers("/worker/edit/*").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/deleteHall/*").access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/hall/*/deleteWorkplace/*")
+                .access("hasRole('ROLE_Admin')");
+        http.authorizeRequests().antMatchers("/deleteDocument/*").access("hasRole('ROLE_Admin')");
 
         // user doesn't have access - wrong role
         // AccessDeniedException will be thrown.

@@ -47,6 +47,8 @@ public class WorkplaceController {
                 workplace.setHall(hall);
                 hall.getWorkplaces().add(workplace);
 
+                attributes.addFlashAttribute("successMsg", "Pracoviště bylo úspěšně přidáno.");
+
                 testService.updateHall(hall);
                 return "redirect:/";
             }
@@ -56,11 +58,14 @@ public class WorkplaceController {
     }
 
     @RequestMapping("hall/{hall.id}/deleteWorkplace/{id}")
-    public String deleteWorkplaceId(@ModelAttribute("workplace") Workplace workplace, @PathVariable("id") long id, @PathVariable("hall.id") long hallId){
+    public String deleteWorkplaceId(@ModelAttribute("workplace") Workplace workplace, @PathVariable("id") long id,
+                                    @PathVariable("hall.id") long hallId, RedirectAttributes attributes){
         Hall hall = testService.findHallById(hallId);
         workplace = testService.findWorkplaceById(id);
 
         hall.removeWorkplace(workplace);
+
+        attributes.addFlashAttribute("successMsg", "Pracoviště bylo úspěšně smazáno.");
 
         System.out.println("Hala: " + hall.getId());
         System.out.println("Workplace: " + workplace.getId());
@@ -120,6 +125,8 @@ public class WorkplaceController {
                 attributes.addFlashAttribute("workplace", workplace);
                 return "addWorkplaceForm";
             }else {
+
+                attributes.addFlashAttribute("successMsg", "Pracoviště bylo úspěšně editováno.");
 
                 Workplace edittedWorkplace = testService.findWorkplaceById(id);
 
