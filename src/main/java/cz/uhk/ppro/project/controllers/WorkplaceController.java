@@ -106,8 +106,8 @@ public class WorkplaceController {
 
     @GetMapping("/workplace/edit/{id}")
     public String editWorkplaceView(Model model, @PathVariable("id") long id){
+        if(!model.containsAttribute("workplace"))  model.addAttribute("workplace", testService.findWorkplaceById(id));
 
-        model.addAttribute("workplace", testService.findWorkplaceById(id));
 
         List<Hall> haly = testService.findAllHalls();
         model.addAttribute("haly", haly);
@@ -123,7 +123,7 @@ public class WorkplaceController {
             if(result.hasErrors()){
                 attributes.addFlashAttribute("org.springframework.validation.BindingResult.workplace", result);
                 attributes.addFlashAttribute("workplace", workplace);
-                return "addWorkplaceForm";
+                return "redirect:/workplace/edit/{id}";
             }else {
 
                 attributes.addFlashAttribute("successMsg", "Pracoviště bylo úspěšně editováno.");

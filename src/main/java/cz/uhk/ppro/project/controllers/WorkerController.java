@@ -87,8 +87,7 @@ public class WorkerController {
     @GetMapping("/worker/edit/{id}")
     public String editWorkerView(Model model, @PathVariable("id") long id){
 
-        model.addAttribute("worker", testService.findWorkerById(id));
-
+        if(!model.containsAttribute("worker")) model.addAttribute("worker", testService.findWorkerById(id));
         List<Workplace> workplaces = testService.findAllWorkplaces();
         model.addAttribute("workplaces", workplaces);
         List<Role> roles = testService.findAllRoles();
@@ -105,7 +104,7 @@ public class WorkerController {
             if(result.hasErrors()){
                 attributes.addFlashAttribute("org.springframework.validation.BindingResult.worker", result);
                 attributes.addFlashAttribute("worker", worker);
-                return "addWorkerForm";
+                return "redirect:/worker/edit/{id}";
             }else {
 
                 Worker edittedWorker = testService.findWorkerById(id);

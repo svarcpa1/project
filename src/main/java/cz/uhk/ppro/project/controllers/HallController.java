@@ -78,8 +78,8 @@ public class HallController {
 
     @GetMapping("/hall/edit/{id}")
     public String editHallView(Model model, @PathVariable("id") long id){
+        if(!model.containsAttribute("hall"))  model.addAttribute("hall", testService.findHallById(id));
 
-        model.addAttribute("hall", testService.findHallById(id));
         return "addHallForm";
     }
 
@@ -91,7 +91,7 @@ public class HallController {
             if(result.hasErrors()){
                 attributes.addFlashAttribute("org.springframework.validation.BindingResult.hall", result);
                 attributes.addFlashAttribute("hall", hall);
-                return "addHallForm";
+                return "redirect:/hall/edit/{id}";
             }else {
 
                 attributes.addFlashAttribute("successMsg", "Hala byla úspěšně editována.");

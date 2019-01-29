@@ -111,8 +111,7 @@ public class DocumentController {
 
     @GetMapping("/document/edit/{id}")
     public String editDocView(Model model, @PathVariable("id") long id){
-
-        model.addAttribute("document", testService.findDocumentById(id));
+        if(!model.containsAttribute("document"))  model.addAttribute("document", testService.findDocumentById(id));
 
         List<Workplace> workplaces = testService.findAllWorkplaces();
         model.addAttribute("workplaces", workplaces);
@@ -131,7 +130,7 @@ public class DocumentController {
             if(result.hasErrors()){
                 attributes.addFlashAttribute("org.springframework.validation.BindingResult.document", result);
                 attributes.addFlashAttribute("document", document);
-                return "addDocumentForm";
+                return "redirect:/document/edit/{id}";
             }else {
 
                 attributes.addFlashAttribute("successMsg", "Dokumentace byla úspěšně editována.");
